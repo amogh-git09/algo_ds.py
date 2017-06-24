@@ -124,5 +124,27 @@ class LinkedList(object):
             ret += " --> " + str(n)
         return ret
 
+    def merge(list1, list2):
+        sorted = LinkedList()
+        h1 = list1.head
+        h2 = list2.head
+        while h1 != None or h2 != None:
+            if h1 != None and h2 != None:
+                if h1.val <= h2.val:
+                    small = h1
+                    h1 = h1.next
+                else:
+                    small = h2
+                    h2 = h2.next
+            elif h1 == None:
+                small = h2
+                h2 = h2.next
+            else:
+                small = h1
+                h1 = h1.next
+            small.next = None
+            sorted.insert_at_end(small)
+        return sorted 
+
 class NotFoundError(Exception):
     pass
