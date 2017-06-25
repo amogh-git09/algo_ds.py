@@ -88,6 +88,33 @@ class Node(object):
             node_k_next.reverse_groups(k, self)
         return r_head
 
+    def remove_cycle(self):
+        if self == None or self.next == None:
+            return
+        slow = fast = self
+        slow = slow.next
+        try:
+            fast = fast.next.next
+        except AttributeError:
+            return
+        while not slow is fast:
+            try:
+                slow = slow.next
+                fast = fast.next.next
+            except AttributeError:
+                return
+        # find start of the cycle
+        slow = self
+        while not slow is fast:
+            slow = slow.next
+            fast = fast.next
+        # find prev node
+        prev = fast.next
+        while not prev.next is fast:
+            prev = prev.next
+        # remove cycle
+        prev.next = None
+
     def __str__(self):
         return str(self.val)
 
@@ -191,7 +218,7 @@ class LinkedList(object):
         self.head = Node.reverse(self.head)
 
     def reverse_groups(self, k):
-        self.head.find_kth_node(k)    
+        self.head.find_kth_node(k)
         self.head = self.head.reverse_groups(k)
 
     def merge_sort(self):
@@ -206,6 +233,9 @@ class LinkedList(object):
         second_list.merge_sort()
         sorted = Node.merge(self.head, second_list.head)
         self.head = sorted.head
+
+    def remove_cycle(self):
+        self.head.remove_cycle()
 
     def __str__(self):
         n = self.head
