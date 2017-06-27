@@ -20,10 +20,7 @@ class LinkedList(object):
         if self.head == None:
             self.head = node
             return
-        last = self.head
-        while last.next != None:
-            last = last.next
-        last.next = node
+        self.head.insert_at_end(node)
 
     def remove_from_end(self):
         if self.head == None:

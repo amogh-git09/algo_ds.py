@@ -3,6 +3,12 @@ class Node(object):
         self.val = val
         self.next = next
 
+    def insert_at_end(self, node):
+        last = self
+        while last.next != None:
+            last = last.next
+        last.next = node
+
     def reverse(self):
         """Reverses the list with node as head and
         returns the head to the reversed list"""
