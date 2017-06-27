@@ -8,6 +8,7 @@ class Node(object):
         while last.next != None:
             last = last.next
         last.next = node
+        return self
 
     def reverse(self):
         """Reverses the list with node as head and
@@ -28,7 +29,7 @@ class Node(object):
         return a
 
     def merge(h1, h2):
-        sorted = LinkedList()
+        head = Node("dummy")
         while h1 != None or h2 != None:
             if h1 != None and h2 != None:
                 if h1.val <= h2.val:
@@ -44,8 +45,11 @@ class Node(object):
                 small = h1
                 h1 = h1.next
             small.next = None
-            sorted.insert_at_end(small)
-        return sorted
+            head.insert_at_end(small)
+        tmp = head.next
+        head.next = None
+        head = tmp
+        return head
 
     def find_middle(self):
         if self == None:
