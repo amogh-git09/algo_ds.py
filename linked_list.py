@@ -237,6 +237,42 @@ class LinkedList(object):
     def remove_cycle(self):
         self.head.remove_cycle()
 
+    def add(list1, list2):
+        n1 = list1.head
+        n2 = list2.head
+        result = LinkedList()
+        carry = s = 0
+        while n1 != None or n2 != None:
+            s = 0
+            if n1 != None and n2 != None:
+                s = n1.val + n2.val + carry
+                carry = 0
+                next_val = s % 10
+                if s >= 10:
+                    carry = 1
+                result.insert_at_end(Node(next_val))
+                n1 = n1.next
+                n2 = n2.next
+            elif n1 != None:
+                s = n1.val + carry
+                carry = 0
+                next_val = s % 10
+                if s >= 10:
+                    carry = 1
+                result.insert_at_end(Node(next_val))
+                n1 = n1.next
+            else:
+                s = n2.val + carry
+                carry = 0
+                next_val = s % 10
+                if s >= 10:
+                    carry = 1
+                result.insert_at_end(Node(next_val))
+                n2 = n2.next
+        if carry == 1:
+            result.insert_at_end(Node(1))
+        return result
+
     def __str__(self):
         n = self.head
         ret = str(n)
