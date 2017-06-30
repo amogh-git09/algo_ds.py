@@ -18,7 +18,6 @@ class TestCircularLinkedList(unittest.TestCase):
         cll = CircularLinkedList()
         cll.insert_at_end(CNode(1))
         cll.insert_at_end(CNode(2))
-        print(cll)
         self.assertEqual(str(cll), "1 -> 2 -> ")
 
     def test_split(self):
@@ -52,6 +51,20 @@ class TestCircularLinkedList(unittest.TestCase):
         cll1, cll2 = cll.split()
         self.assertEqual(str(cll1), "1 -> ")
         self.assertEqual(str(cll2), "2 -> ")
+
+    def test_insert_sorted(self):
+        cll = CircularLinkedList()
+        cll.insert_sorted(CNode(1))
+        self.assertEqual(str(cll), "1 -> ")
+
+        cll.insert_sorted(CNode(0))
+        self.assertEqual(str(cll), "0 -> 1 -> ")
+
+        cll.insert_sorted(CNode(3))
+        self.assertEqual(str(cll), "0 -> 1 -> 3 -> ")
+
+        cll.insert_sorted(CNode(2))
+        self.assertEqual(str(cll), "0 -> 1 -> 2 -> 3 -> ")
 
 if __name__ == '__main__':
     unittest.main()

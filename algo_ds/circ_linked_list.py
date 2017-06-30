@@ -13,6 +13,13 @@ class CircularLinkedList(object):
         last1, last2 = self.last.split()
         return (CircularLinkedList(last1), CircularLinkedList(last2))
 
+    def insert_sorted(self, node):
+        if self.last == None:
+            self.last = node
+            node.next = node
+            return
+        self.last = self.last.insert_sorted(node)
+
     def __str__(self):
         ret = ""
         n = self.last.next

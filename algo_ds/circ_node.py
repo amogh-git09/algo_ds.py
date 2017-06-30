@@ -39,5 +39,21 @@ class CNode(object):
         last.next = mid_next
         return (mid, last)
 
+    def insert_sorted(self, node):
+        last = self
+        head = n = last.next
+        prev = last
+        while not n is last:
+            if n.val >= node.val:
+                break
+            n = n.next
+            prev = prev.next
+        if n is last:
+            if n.val <= node.val:
+                return last.insert_at_end(node)
+        prev.next = node
+        node.next = n
+        return last 
+
     def __str__(self):
         return str(self.val)

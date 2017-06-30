@@ -48,5 +48,25 @@ class TestCNode(unittest.TestCase):
         self.assertEqual(n1, node3)
         self.assertEqual(n2, node5)
 
+    def test_insert_sorted(self):
+        node = CNode(1)
+        node2 = CNode(2)
+        last = node.insert_sorted(node2)
+        self.assertEqual(last, node2)
+
+        node = CNode(1)
+        node2 = CNode(0)
+        last = node.insert_sorted(node2)
+        self.assertEqual(last, node)
+        node3 = CNode(3)
+        last = last.insert_sorted(node3)
+        self.assertEqual(last, node3)
+        node4 = CNode(2)
+        last = last.insert_sorted(node4)
+        self.assertEqual(last, node3)
+        self.assertEqual(last.next, node2)
+        self.assertEqual(last.next.next, node)
+        self.assertEqual(last.next.next.next, node4)
+
 if __name__ == '__main__':
     unittest.main()
