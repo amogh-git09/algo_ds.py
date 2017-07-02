@@ -86,5 +86,23 @@ class TestDNode(unittest.TestCase):
         self.assertEqual(node.next, node3)
         self.assertEqual(node3.prev, node)
 
+    def test_is_reachable(self):
+        node = DNode(1)
+        node2 = DNode(2)
+        node3 = DNode(3)
+        self.assertEqual(node.is_reachable(node2), False)
+        node.insert_after(node2)
+        self.assertEqual(node.is_reachable(node2), True)
+        node2.insert_after(node3)
+        self.assertEqual(node.is_reachable(node3), True)
+        self.assertEqual(node2.is_reachable(node3), True)
+
+    def test_swap_data(self):
+        node = DNode(1)
+        node2 = DNode(2)
+        DNode.swap_data(node, node2)
+        self.assertEqual(node.val, 2)
+        self.assertEqual(node2.val, 1)
+
 if __name__ == '__main__':
     unittest.main()

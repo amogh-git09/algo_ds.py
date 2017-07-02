@@ -25,6 +25,28 @@ class DoublyLinkedList(object):
             n = n.next
         n.insert_after(node)
 
+    def reverse(self):
+        if self.head == None:
+            return
+        last = None
+        n = self.head
+        while n != None:
+            n_prev = n.prev
+            n_next = n.next
+            n.next = n_prev
+            n.prev = n_next
+            last = n
+            n = n.prev
+        self.head = last
+
+    def quick_sort(self):
+        if self.head == None:
+            return
+        last = self.head
+        while last.next != None:
+            last = last.next
+        DNode.quick_sort(self.head, last)
+
     def __str__(self):
         if self.head == None:
             return ""
