@@ -20,10 +20,7 @@ class DoublyLinkedList(object):
             node.next = node.prev = None
             return
 
-        n = self.head
-        while n.next != None:
-            n = n.next
-        n.insert_after(node)
+        self.head.insert_at_end(node)
 
     def reverse(self):
         if self.head == None:
@@ -46,6 +43,15 @@ class DoublyLinkedList(object):
         while last.next != None:
             last = last.next
         DNode.quick_sort(self.head, last)
+
+    def merge(l1, l2):
+        n1 = l1.head
+        n2 = l2.head
+        merged_head = DNode.merge(n1, n2)
+        return DoublyLinkedList(merged_head)
+
+    def merge_sort(self):
+        self.head = DNode.merge_sort(self.head)
 
     def __str__(self):
         if self.head == None:

@@ -26,6 +26,14 @@ class DNode(object):
         node.next = n
         n.prev = node
 
+    def insert_at_end(self, node):
+        """inserts node at end assuming that
+        self is the head node of a Doubly linked list"""
+        n = self
+        while n.next != None:
+            n = n.next
+        n.insert_after(node)
+
     def remove_from_list(self):
         prev = self.prev
         n = self.next
@@ -68,6 +76,50 @@ class DNode(object):
             DNode.swap_data(n, wall)
             DNode.quick_sort(left, wall.prev)
             DNode.quick_sort(wall.next, right)
+
+    def merge(n1, n2):
+        merged_head = DNode(None)
+        while n1 != None or n2 != None:
+            if n1 != None and n2 != None:
+                if n1.val <= n2.val:
+                    n1 = DNode.insert_merged(n1, merged_head)
+                else:
+                    n2 = DNode.insert_merged(n2, merged_head)
+            elif n1 != None:
+                n1 = DNode.insert_merged(n1, merged_head)
+            else:
+                n2 = DNode.insert_merged(n2, merged_head)
+        tmp = merged_head.next
+        merged_head.next = None
+        merged_head = tmp
+        return merged_head
+
+    def find_middle(self):
+        slow = self
+        fast = self.next
+        while fast != None and fast.next != None:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+
+    def merge_sort(head):
+        if head == None or head.next == None:
+            return head
+        mid = head.find_middle()
+        mid_next = mid.next
+        mid.next = None
+        mid_next.prev = None
+        head1 = DNode.merge_sort(head)
+        head2 = DNode.merge_sort(mid_next)
+        return DNode.merge(head1, head2)
+
+    def insert_merged(node, head):
+        node_next = node.next
+        if node_next != None:
+            node_next.prev = None
+        node.next = None
+        head.insert_at_end(node)
+        return node_next
 
     def __str__(self):
         return str(self.val)

@@ -51,3 +51,53 @@ class TestDoublyLinkedList(unittest.TestCase):
         dll.insert_at_end(DNode(6))
         dll.quick_sort()
         self.assertEqual(str(dll), "1 -> 1 -> 1 -> 2 -> 2 -> 4 -> 6 -> 8 -> None")
+
+    def test_merge(self):
+        l1 = DoublyLinkedList()
+        l1.insert_at_end(DNode(1))
+        l1.insert_at_end(DNode(3))
+        l1.insert_at_end(DNode(5))
+        l1.insert_at_end(DNode(6))
+
+        l2 = DoublyLinkedList()
+        l2.insert_at_end(DNode(2))
+        l2.insert_at_end(DNode(4))
+        l2.insert_at_end(DNode(5))
+
+        merged = DoublyLinkedList.merge(l1, l2)
+        self.assertEqual(str(merged), "1 -> 2 -> 3 -> 4 -> 5 -> 5 -> 6 -> None")
+
+        l1 = DoublyLinkedList()
+        l1.insert_at_end(DNode(1))
+        l1.insert_at_end(DNode(3))
+        l1.insert_at_end(DNode(5))
+        l1.insert_at_end(DNode(6))
+
+        l2 = DoublyLinkedList()
+        l2.insert_at_end(DNode(2))
+
+        merged = DoublyLinkedList.merge(l1, l2)
+        self.assertEqual(str(merged), "1 -> 2 -> 3 -> 5 -> 6 -> None")
+
+        l1 = DoublyLinkedList()
+        l2 = DoublyLinkedList()
+        merged = DoublyLinkedList.merge(l1, l2)
+        self.assertEqual(str(merged), "")
+
+    def test_merge_sort(self):
+        dll = DoublyLinkedList()
+        dll.insert_at_end(DNode(3))
+        dll.insert_at_end(DNode(1))
+        dll.insert_at_end(DNode(4))
+        dll.insert_at_end(DNode(2))
+        dll.insert_at_end(DNode(2))
+        dll.merge_sort()
+        self.assertEqual(str(dll), "1 -> 2 -> 2 -> 3 -> 4 -> None")
+
+        dll = DoublyLinkedList()
+        dll.merge_sort()
+        self.assertEqual(str(dll), "")
+
+        dll = DoublyLinkedList()
+        dll.insert_at_end(DNode(3))
+        self.assertEqual(str(dll), "3 -> None")
