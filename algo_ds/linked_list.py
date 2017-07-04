@@ -1,4 +1,4 @@
-from node import *
+from algo_ds.node import *
 
 class LinkedList(object):
     def __init__(self, head=None):
@@ -167,7 +167,7 @@ class LinkedList(object):
         ret = str(n)
         while n != None:
             n = n.next
-            ret += " --> " + str(n)
+            ret += " -> " + str(n)
         return ret
 
 class NotFoundError(Exception):

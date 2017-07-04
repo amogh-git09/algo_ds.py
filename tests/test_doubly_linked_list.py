@@ -101,3 +101,6 @@ class TestDoublyLinkedList(unittest.TestCase):
         dll = DoublyLinkedList()
         dll.insert_at_end(DNode(3))
         self.assertEqual(str(dll), "3 -> None")
+
+if __name__ == '__main__':
+    unittest.main()
