@@ -27,3 +27,26 @@ def convert_to_postfix(expr):
     while not stack.isEmpty():
         postfix += stack.pop()
     return postfix
+
+def evaluate(expr):
+    if expr == "":
+        return 0
+    stack = Stack()
+    for c in expr:
+        if c not in operators:
+            stack.push(c)
+        else:
+            right = int(stack.pop())
+            left = int(stack.pop())
+            if c == '+':
+                result = left + right
+            elif c == '-':
+                result = left - right
+            elif c == '*':
+                result = left * right
+            elif c == '/':
+                result = left / right 
+            else:
+                raise ValueError("invalid operator", c)
+            stack.push(result)
+    return stack.pop()
