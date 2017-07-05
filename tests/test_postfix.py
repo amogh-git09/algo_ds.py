@@ -1,4 +1,4 @@
-from algo_ds.postfix import convert_to_postfix, evaluate
+from algo_ds.postfix import *
 import unittest
 
 class TestPostfix(unittest.TestCase):
@@ -13,3 +13,10 @@ class TestPostfix(unittest.TestCase):
         self.assertEqual(evaluate(convert_to_postfix("(1+2*3)*3*4*(5*2-6/2)")), 588)
         self.assertEqual(evaluate(convert_to_postfix("")), 0)
         self.assertEqual(evaluate(convert_to_postfix("()")), 0)
+
+    def test_check_balanced_parantheses(self):
+        self.assertEqual(check_balanced_parantheses("(1+2)"), True)
+        self.assertEqual(check_balanced_parantheses("1+2"), True)
+        self.assertEqual(check_balanced_parantheses("(1+2))"), False)
+        self.assertEqual(check_balanced_parantheses("(((((1+2)))))"), True)
+        self.assertEqual(check_balanced_parantheses("((((1+2)))))"), False)

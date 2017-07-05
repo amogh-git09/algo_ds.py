@@ -45,8 +45,19 @@ def evaluate(expr):
             elif c == '*':
                 result = left * right
             elif c == '/':
-                result = left / right 
+                result = left / right
             else:
                 raise ValueError("invalid operator", c)
             stack.push(result)
     return stack.pop()
+
+def check_balanced_parantheses(expr):
+    stack = Stack()
+    for c in expr:
+        if c == '(':
+            stack.push(c)
+        elif c == ')':
+            if stack.isEmpty():
+                return False
+            stack.pop()
+    return stack.isEmpty()
