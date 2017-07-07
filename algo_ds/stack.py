@@ -17,5 +17,14 @@ class Stack(object):
     def peek(self):
         return self.list.head.val
 
+    def reverse(stack):
+        return Stack.reverse_rec(stack, Stack())
+
+    def reverse_rec(stack, stack2):
+        if stack.isEmpty():
+            return stack2
+        stack2.push(stack.pop())
+        return Stack.reverse_rec(stack, stack2)
+
     def __str__(self):
         return str(self.list)

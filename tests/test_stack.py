@@ -15,5 +15,13 @@ class TestStack(unittest.TestCase):
         self.assertEqual(stack.pop(), 2)
         self.assertEqual(stack.pop(), 1)
 
+    def test_reverse(self):
+        stack = Stack()
+        stack.push(1)
+        stack.push(2)
+        stack.push(3)
+        stack.push(4)
+        self.assertEqual(str(Stack.reverse(stack)), "1 -> 2 -> 3 -> 4 -> None")
+
 if __name__ == '__main__':
     unittest.main()
