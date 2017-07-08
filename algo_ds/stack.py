@@ -3,19 +3,31 @@ from algo_ds.node import Node
 
 class Stack(object):
     def __init__(self):
-        self.list = LinkedList()
+        self.top = None
 
     def push(self, val):
-        self.list.insert(Node(val))
+        node = Node(val)
+        if self.top is None:
+            self.top = node
+        else:
+            node.next = self.top
+            self.top = node
 
     def pop(self):
-        return self.list.remove().val
+        if self.top is None:
+            raise IndexError("Stack underflow")
+        tmp = self.top
+        self.top = self.top.next
+        tmp.next = None
+        return tmp.val
 
     def isEmpty(self):
-        return self.list.head == None
+        return self.top is None
 
     def peek(self):
-        return self.list.head.val
+        if self.top is None:
+            raise IndexError("Stack is empty")
+        return self.top.val
 
     def reverse(stack):
         return Stack.reverse_rec(stack, Stack())
@@ -94,6 +106,3 @@ class Stack(object):
             return elem
         else:
             return m
-
-    def __str__(self):
-        return str(self.list)

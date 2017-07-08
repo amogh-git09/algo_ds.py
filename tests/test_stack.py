@@ -8,7 +8,6 @@ class TestStack(unittest.TestCase):
         stack.push(2)
         stack.push(3)
         stack.push(4)
-        self.assertEqual(str(stack), "4 -> 3 -> 2 -> 1 -> None")
 
         self.assertEqual(stack.pop(), 4)
         self.assertEqual(stack.pop(), 3)
@@ -21,7 +20,11 @@ class TestStack(unittest.TestCase):
         stack.push(2)
         stack.push(3)
         stack.push(4)
-        self.assertEqual(str(Stack.reverse(stack)), "1 -> 2 -> 3 -> 4 -> None")
+        stack = stack.reverse()
+        self.assertEqual(stack.pop(), 1)
+        self.assertEqual(stack.pop(), 2)
+        self.assertEqual(stack.pop(), 3)
+        self.assertEqual(stack.pop(), 4)
 
     def test_merge(self):
         s1 = Stack()
@@ -32,7 +35,13 @@ class TestStack(unittest.TestCase):
         s2 = Stack()
         s2.push(2)
         s2.push(4)
-        self.assertEqual(str(Stack.merge(s1, s2)), "7 -> 5 -> 4 -> 3 -> 2 -> 1 -> None")
+        merged = Stack.merge(s1, s2)
+        self.assertEqual(merged.pop(), 7)
+        self.assertEqual(merged.pop(), 5)
+        self.assertEqual(merged.pop(), 4)
+        self.assertEqual(merged.pop(), 3)
+        self.assertEqual(merged.pop(), 2)
+        self.assertEqual(merged.pop(), 1)
 
     def test_split(self):
         s = Stack()
@@ -42,8 +51,11 @@ class TestStack(unittest.TestCase):
         s.push(4)
         s.push(5)
         s1, s2 = s.split()
-        self.assertEqual(str(s1), "2 -> 1 -> None")
-        self.assertEqual(str(s2), "3 -> 4 -> 5 -> None")
+        self.assertEqual(s1.pop(), 2)
+        self.assertEqual(s1.pop(), 1)
+        self.assertEqual(s2.pop(), 3)
+        self.assertEqual(s2.pop(), 4)
+        self.assertEqual(s2.pop(), 5)
 
     def test_merge_sort(self):
         s = Stack()
@@ -52,7 +64,12 @@ class TestStack(unittest.TestCase):
         s.push(5)
         s.push(2)
         s.push(4)
-        self.assertEqual(str(Stack.merge_sort(s)), "5 -> 4 -> 3 -> 2 -> 1 -> None")
+        s = Stack.merge_sort(s)
+        self.assertEqual(s.pop(), 5)
+        self.assertEqual(s.pop(), 4)
+        self.assertEqual(s.pop(), 3)
+        self.assertEqual(s.pop(), 2)
+        self.assertEqual(s.pop(), 1)
 
     def test_sort(self):
         s = Stack()
@@ -62,16 +79,20 @@ class TestStack(unittest.TestCase):
         s.push(2)
         s.push(4)
         s.sort()
-        self.assertEqual(str(s), "5 -> 4 -> 3 -> 2 -> 1 -> None")
+        self.assertEqual(s.pop(), 5)
+        self.assertEqual(s.pop(), 4)
+        self.assertEqual(s.pop(), 3)
+        self.assertEqual(s.pop(), 2)
+        self.assertEqual(s.pop(), 1)
 
         s = Stack()
         s.push(1)
         s.sort()
-        self.assertEqual(str(s), "1 -> None")
+        self.assertEqual(s.pop(), 1)
 
         s = Stack()
         s.sort()
-        self.assertEqual(str(s), "None")
+        self.assertRaises(IndexError, s.pop)
 
     def test_get_min(self):
         s = Stack()
