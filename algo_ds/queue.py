@@ -20,7 +20,10 @@ class Queue(object):
         self.head = self.head.next
         if self.head is None:
             self.last = None
-        return tmp.val 
+        return tmp.val
+
+    def is_empty(self):
+        return self.head is None 
 
     def __str__(self):
         ret = ""
