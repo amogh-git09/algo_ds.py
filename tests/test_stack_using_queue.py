@@ -18,3 +18,13 @@ class TestStackUsingQueue(unittest.TestCase):
         self.assertEqual(stack.pop(), 2)
         self.assertEqual(stack.pop(), 1)
         self.assertEqual(stack.pop(), None)
+
+    def test_pop_iter(self):
+        stack = Stack()
+        stack.push(1)
+        stack.push(2)
+        stack.push(3)
+        self.assertEqual(stack.pop_iter(), 3)
+        self.assertEqual(stack.pop_iter(), 2)
+        self.assertEqual(stack.pop_iter(), 1)
+        self.assertEqual(stack.pop_iter(), None)

@@ -21,5 +21,15 @@ class Stack(object):
         elem = self.q.dequeue()
         return self.pop_rec(q2, elem)
 
+    def pop_iter(self):
+        q2 = Queue()
+        result = None
+        while not self.q.is_empty():
+            if result != None:
+                q2.enqueue(result)
+            result = self.q.dequeue()
+        self.q = q2
+        return result
+
     def __str__(self):
         return str(self.q)
