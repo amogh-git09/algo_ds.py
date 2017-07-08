@@ -69,5 +69,20 @@ class Stack(object):
         s2 = Stack.merge_sort(s2)
         return Stack.merge(s1, s2)
 
+    def insert_sorted(self, n):
+        if self.isEmpty() or self.peek() <= n:
+            self.push(n)
+        else:
+            tmp = self.pop()
+            self.insert_sorted(n)
+            self.push(tmp)
+
+    def sort(self):
+        if self.isEmpty():
+            return
+        tmp = self.pop()
+        self.sort()
+        self.insert_sorted(tmp)
+
     def __str__(self):
         return str(self.list)

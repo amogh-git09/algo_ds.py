@@ -54,5 +54,24 @@ class TestStack(unittest.TestCase):
         s.push(4)
         self.assertEqual(str(Stack.merge_sort(s)), "5 -> 4 -> 3 -> 2 -> 1 -> None")
 
+    def test_sort(self):
+        s = Stack()
+        s.push(3)
+        s.push(1)
+        s.push(5)
+        s.push(2)
+        s.push(4)
+        s.sort()
+        self.assertEqual(str(s), "5 -> 4 -> 3 -> 2 -> 1 -> None")
+
+        s = Stack()
+        s.push(1)
+        s.sort()
+        self.assertEqual(str(s), "1 -> None")
+
+        s = Stack()
+        s.sort()
+        self.assertEqual(str(s), "None")
+
 if __name__ == '__main__':
     unittest.main()
