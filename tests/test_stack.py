@@ -73,5 +73,17 @@ class TestStack(unittest.TestCase):
         s.sort()
         self.assertEqual(str(s), "None")
 
+    def test_get_min(self):
+        s = Stack()
+        s.push(3)
+        s.push(1)
+        s.push(5)
+        s.push(2)
+        s.push(4)
+        self.assertEqual(s.get_min(), 1)
+
+        s = Stack()
+        self.assertEqual(s.get_min(), None)
+
 if __name__ == '__main__':
     unittest.main()

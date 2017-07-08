@@ -84,5 +84,16 @@ class Stack(object):
         self.sort()
         self.insert_sorted(tmp)
 
+    def get_min(self):
+        if self.isEmpty():
+            return None
+        elem = self.pop()
+        m = self.get_min()
+        self.push(elem)
+        if m is None or elem <= m:
+            return elem
+        else:
+            return m
+
     def __str__(self):
         return str(self.list)
