@@ -12,3 +12,8 @@ class BinarySearchTree(object):
             self.root = node
         else:
             self.root.insert(node)
+
+    def traversal_inorder(self, func):
+        if self.root is None:
+            raise ValueError("Tree is empty")
+        self.root.traversal_inorder(func)
