@@ -59,3 +59,18 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(result[2], tree.root.left.left)
         self.assertEqual(result[3], tree.root.right)
         self.assertEqual(result[4], tree.root.right.left)
+
+    def test_traversal_breadth_first(self):
+        tree = BinarySearchTree()
+        tree.insert(32, 1)
+        tree.insert(20, 2)
+        tree.insert(38, 3)
+        tree.insert(35, 4)
+        tree.insert(10, 5)
+        result = []
+        tree.traversal_breadth_first(lambda node: result.append(node))
+        self.assertEqual(result[0], tree.root)
+        self.assertEqual(result[1], tree.root.left)
+        self.assertEqual(result[2], tree.root.right)
+        self.assertEqual(result[3], tree.root.left.left)
+        self.assertEqual(result[4], tree.root.right.left)

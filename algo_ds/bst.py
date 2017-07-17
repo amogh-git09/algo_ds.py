@@ -1,4 +1,5 @@
 from algo_ds.bst_node import Node
+from algo_ds.queue import Queue
 
 class BinarySearchTree(object):
     def __init__(self):
@@ -27,3 +28,16 @@ class BinarySearchTree(object):
         if self.root is None:
             raise ValueError("Tree is empty")
         self.root.traversal_postorder(func)
+
+    def traversal_breadth_first(self, func):
+        if self.root is None:
+            raise ValueError("Tree is empty")
+        q = Queue()
+        q.enqueue(self.root)
+        while not q.is_empty():
+            n = q.dequeue()
+            if n.left is not None:
+                q.enqueue(n.left)
+            if n.right is not None:
+                q.enqueue(n.right)
+            func(n)
