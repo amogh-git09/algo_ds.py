@@ -22,3 +22,8 @@ class BinarySearchTree(object):
         if self.root is None:
             raise ValueError("Tree is empty")
         self.root.traversal_preorder(func)
+
+    def traversal_postorder(self, func):
+        if self.root is None:
+            raise ValueError("Tree is empty")
+        self.root.traversal_postorder(func)
