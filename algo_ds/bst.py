@@ -32,15 +32,24 @@ class BinarySearchTree(object):
     def traversal_breadth_first(self, func):
         if self.root is None:
             raise ValueError("Tree is empty")
-        q = Queue()
-        q.enqueue(self.root)
-        while not q.is_empty():
-            n = q.dequeue()
-            if n.left is not None:
-                q.enqueue(n.left)
-            if n.right is not None:
-                q.enqueue(n.right)
-            func(n)
+        self.root.traversal_breadth_first(func)
+
+    def search(self, key):
+        if self.root is None:
+            raise ValueError("Tree is empty")
+        return Node.search_iter(self.root, key)
+
+    def minimum(self):
+        self.not_empty_or_error()
+        return self.root.minimum_iter()
+
+    def maximum(self):
+        self.not_empty_or_error()
+        return self.root.maximum_iter()
+
+    def not_empty_or_error(self):
+        if self.root is None:
+            raise ValueError("Tree is empty")
 
     def height(self):
         return Node.height(self.root)

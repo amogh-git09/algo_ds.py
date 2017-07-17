@@ -98,3 +98,32 @@ class TestBinarySearchTree(unittest.TestCase):
 
         tree = BinarySearchTree()
         self.assertEqual(tree.height(), -1)
+
+
+    def test_search(self):
+        tree = BinarySearchTree()
+        tree.insert(32, 1)
+        tree.insert(20, 2)
+        tree.insert(38, 3)
+        tree.insert(35, 4)
+        tree.insert(10, 5)
+        self.assertEqual(tree.search(38).val, 3)
+        self.assertEqual(tree.search(200), None)
+
+    def test_minimum(self):
+        tree = BinarySearchTree()
+        tree.insert(32, 1)
+        tree.insert(20, 2)
+        tree.insert(38, 3)
+        tree.insert(35, 4)
+        tree.insert(10, 5)
+        self.assertEqual(tree.minimum().val, 5)
+
+    def test_maximum(self):
+        tree = BinarySearchTree()
+        tree.insert(32, 1)
+        tree.insert(20, 2)
+        tree.insert(38, 3)
+        tree.insert(35, 4)
+        tree.insert(10, 5)
+        self.assertEqual(tree.maximum().val, 3)

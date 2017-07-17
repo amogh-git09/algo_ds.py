@@ -1,3 +1,5 @@
+from algo_ds.queue import Queue
+
 class Node(object):
     def __init__(self, key, val):
         self.key = key
@@ -37,6 +39,58 @@ class Node(object):
             self.left.traversal_preorder(func)
         if self.right is not None:
             self.right.traversal_preorder(func)
+
+    def traversal_breadth_first(self, func):
+        q = Queue()
+        q.enqueue(self)
+        while not q.is_empty():
+            n = q.dequeue()
+            if n.left is not None:
+                q.enqueue(n.left)
+            if n.right is not None:
+                q.enqueue(n.right)
+            func(n)
+
+    def search(node, key):
+        if node is None:
+            return None
+        if node.key == key:
+            return node
+        if key <= node.key:
+            return Node.search(node.left, key)
+        else:
+            return Node.search(node.right, key)
+
+    def search_iter(node, key):
+        while node is not None and node.key != key:
+            if key <= node.key:
+                node = node.left
+            else:
+                node = node.right
+        return node
+
+    def minimum(self):
+        if self.left is None:
+            return self
+        else:
+            return self.left.minimum()
+
+    def minimum_iter(self):
+        node = self
+        while node.left is not None:
+            node = node.left
+        return node
+
+    def maximum(self):
+        if self.right is None:
+            return self
+        return self.right.maximum()
+
+    def maximum_iter(self):
+        node = self
+        while node.right is not None:
+            node = node.right
+        return node
 
     def height(node):
         if node is None:
