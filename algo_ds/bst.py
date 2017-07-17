@@ -41,3 +41,6 @@ class BinarySearchTree(object):
             if n.right is not None:
                 q.enqueue(n.right)
             func(n)
+
+    def height(self):
+        return Node.height(self.root)

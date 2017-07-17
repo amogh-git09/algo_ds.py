@@ -74,3 +74,27 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(result[2], tree.root.right)
         self.assertEqual(result[3], tree.root.left.left)
         self.assertEqual(result[4], tree.root.right.left)
+
+    def test_height(self):
+        tree = BinarySearchTree()
+        tree.insert(32, 1)
+        tree.insert(20, 2)
+        tree.insert(38, 3)
+        tree.insert(35, 4)
+        tree.insert(10, 5)
+        self.assertEqual(tree.height(), 2)
+
+        tree = BinarySearchTree()
+        tree.insert(32, 1)
+        tree.insert(31, 2)
+        tree.insert(30, 3)
+        tree.insert(29, 4)
+        tree.insert(28, 5)
+        self.assertEqual(tree.height(), 4)
+
+        tree = BinarySearchTree()
+        tree.insert(1, 1)
+        self.assertEqual(tree.height(), 0)
+
+        tree = BinarySearchTree()
+        self.assertEqual(tree.height(), -1)

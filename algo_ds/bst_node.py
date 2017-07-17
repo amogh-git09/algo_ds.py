@@ -38,6 +38,16 @@ class Node(object):
         if self.right is not None:
             self.right.traversal_preorder(func)
 
+    def height(node):
+        if node is None:
+            return -1
+        lheight = Node.height(node.left)
+        rheight = Node.height(node.right)
+        if lheight <= rheight:
+            return rheight + 1
+        else:
+            return lheight + 1
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 
