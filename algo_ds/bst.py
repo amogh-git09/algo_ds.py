@@ -12,7 +12,7 @@ class BinarySearchTree(object):
         if self.root is None:
             self.root = node
         else:
-            self.root.insert(node)
+            self.root.insert_iter(node)
 
     def traversal_inorder(self, func):
         if self.root is None:

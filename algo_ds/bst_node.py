@@ -6,18 +6,35 @@ class Node(object):
         self.val = val
         self.left = None
         self.right = None
+        self.parent = None
 
     def insert(self, node):
         if self.key <= node.key:
             if self.right is None:
                 self.right = node
+                node.parent = self
             else:
                 self.right.insert(node)
         else:
             if self.left is None:
                 self.left = node
+                node.parent = self
             else:
                 self.left.insert(node)
+
+    def insert_iter(self, node):
+        p = None
+        n = self
+        while n is not None:
+            p = n
+            if n.key <= node.key:
+                n = n.right
+            else:
+                n = n.left
+        if p.key <= node.key:
+            p.right = node
+        else:
+            p.left = node 
 
     def traversal_inorder(self, func):
         if self.left is not None:
