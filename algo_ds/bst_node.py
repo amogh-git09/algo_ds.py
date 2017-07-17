@@ -24,6 +24,13 @@ class Node(object):
         if self.right is not None:
             self.right.traversal_inorder(func)
 
+    def traversal_preorder(self, func):
+        if self.left is not None:
+            self.left.traversal_preorder(func)
+        if self.right is not None:
+            self.right.traversal_preorder(func)
+        func(self)
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 
