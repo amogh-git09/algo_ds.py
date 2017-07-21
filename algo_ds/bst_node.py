@@ -129,8 +129,16 @@ class Node(object):
         while p is not None and p.right is n:
             n = p
             p = n.parent
-        if p is None:
-            return None
+        return p
+
+    def pred(self):
+        if self.left is not None:
+            return self.left
+        n = self
+        p = n.parent
+        while p is not None and p.left is n:
+            n = p
+            p = n.parent
         return p
 
     def __str__(self):
