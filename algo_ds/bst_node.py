@@ -33,8 +33,10 @@ class Node(object):
                 n = n.left
         if p.key <= node.key:
             p.right = node
+            node.parent = p
         else:
-            p.left = node 
+            p.left = node
+            node.parent = p
 
     def traversal_inorder(self, func):
         if self.left is not None:
@@ -118,6 +120,18 @@ class Node(object):
             return rheight + 1
         else:
             return lheight + 1
+
+    def succ(self):
+        if self.right is not None:
+            return self.right
+        n = self
+        p = n.parent
+        while p is not None and p.right is n:
+            n = p
+            p = n.parent
+        if p is None:
+            return None
+        return p
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
