@@ -53,3 +53,6 @@ class BinarySearchTree(object):
 
     def height(self):
         return Node.height(self.root)
+
+    def diameter(self):
+        return Node.diameter(self.root)

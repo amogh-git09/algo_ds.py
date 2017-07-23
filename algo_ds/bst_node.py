@@ -141,6 +141,13 @@ class Node(object):
             p = n.parent
         return p
 
+    def diameter(node):
+        if node is None:
+            return -1
+        return max(Node.diameter(node.left),
+            Node.diameter(node.right),
+            2 + Node.height(node.left) + Node.height(node.right))
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 
