@@ -1,4 +1,5 @@
 from algo_ds.queue import Queue
+from algo_ds.stack import Stack
 
 class Node(object):
     def __init__(self, key, val):
@@ -147,6 +148,42 @@ class Node(object):
         return max(Node.diameter(node.left),
             Node.diameter(node.right),
             2 + Node.height(node.left) + Node.height(node.right))
+
+    def traversal_inorder_iter(self, func):
+        stack = Stack()
+        Node.insert_lefts(self, stack)
+        while not stack.is_empty():
+            n = stack.pop()
+            func(n)
+            Node.insert_lefts(n.right, stack)
+
+    def insert_lefts(self, stack):
+        n = self
+        while n is not None:
+            stack.push(n)
+            n = n.left
+
+    def traversal_inorder_morris(self, func):
+        n = self
+        while n is not None:
+            if n.left is None:
+                func(n)
+                n = n.right
+            else:
+                pred = n.find_pred()
+                if pred.right is None:
+                    pred.right = n
+                    n = n.left
+                else:
+                    pred.right = None
+                    func(n)
+                    n = n.right
+
+    def find_pred(self):
+        pred = self.left
+        while (pred.right is not None) and (pred.right is not self):
+            pred = pred.right
+        return pred
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)

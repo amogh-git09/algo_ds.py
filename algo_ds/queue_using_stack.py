@@ -8,7 +8,7 @@ class QueueUsingStack(object):
         self.stack.push(val)
 
     def dequeue(self):
-        if self.stack.isEmpty():
+        if self.stack.is_empty():
             return None
         elem = self.stack.pop()
         ret = self.dequeue()
@@ -16,4 +16,4 @@ class QueueUsingStack(object):
             self.stack.push(elem)
             return ret
         else:
-            return elem 
+            return elem

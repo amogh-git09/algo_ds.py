@@ -56,3 +56,9 @@ class BinarySearchTree(object):
 
     def diameter(self):
         return Node.diameter(self.root)
+
+    def traversal_inorder_iter(self, func):
+        self.root.traversal_inorder_iter(func)
+
+    def traversal_inorder_morris(self, func):
+        self.root.traversal_inorder_morris(func)

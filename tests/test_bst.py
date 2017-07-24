@@ -199,3 +199,33 @@ class TestBinarySearchTree(unittest.TestCase):
         tree.insert(18, 12)
         tree.insert(18, 13)
         self.assertEqual(tree.diameter(), 8)
+
+    def test_traversal_inorder_iter(self):
+        tree = BinarySearchTree()
+        tree.insert(32, 1)
+        tree.insert(20, 2)
+        tree.insert(38, 3)
+        tree.insert(35, 4)
+        tree.insert(10, 5)
+        result = []
+        tree.traversal_inorder_iter(lambda node: result.append(node))
+        self.assertEqual(result[0], tree.root.left.left)
+        self.assertEqual(result[1], tree.root.left)
+        self.assertEqual(result[2], tree.root)
+        self.assertEqual(result[3], tree.root.right.left)
+        self.assertEqual(result[4], tree.root.right)
+
+    def test_traversal_inorder_iter(self):
+        tree = BinarySearchTree()
+        tree.insert(32, 1)
+        tree.insert(20, 2)
+        tree.insert(38, 3)
+        tree.insert(35, 4)
+        tree.insert(10, 5)
+        result = []
+        tree.traversal_inorder_morris(lambda node: result.append(node))
+        self.assertEqual(result[0], tree.root.left.left)
+        self.assertEqual(result[1], tree.root.left)
+        self.assertEqual(result[2], tree.root)
+        self.assertEqual(result[3], tree.root.right.left)
+        self.assertEqual(result[4], tree.root.right)

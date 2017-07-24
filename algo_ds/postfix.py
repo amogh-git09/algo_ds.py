@@ -14,17 +14,17 @@ def convert_to_postfix(expr):
                 while popped != '(':
                     postfix += popped
                     popped = stack.pop()
-            elif stack.isEmpty():
+            elif stack.is_empty():
                 stack.push(c)
             elif operators[stack.peek()] < operators[c]:
                 stack.push(c)
             else:
-                while (not stack.isEmpty()) and (operators[stack.peek()] >= operators[c]):
+                while (not stack.is_empty()) and (operators[stack.peek()] >= operators[c]):
                     postfix += stack.pop()
                 stack.push(c)
         else:
             postfix += c
-    while not stack.isEmpty():
+    while not stack.is_empty():
         postfix += stack.pop()
     return postfix
 
@@ -57,7 +57,7 @@ def check_balanced_parantheses(expr):
         if c == '(':
             stack.push(c)
         elif c == ')':
-            if stack.isEmpty():
+            if stack.is_empty():
                 return False
             stack.pop()
-    return stack.isEmpty()
+    return stack.is_empty()
