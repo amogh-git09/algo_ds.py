@@ -117,10 +117,7 @@ class Node(object):
             return -1
         lheight = Node.height(node.left)
         rheight = Node.height(node.right)
-        if lheight <= rheight:
-            return rheight + 1
-        else:
-            return lheight + 1
+        return max(lheight, rheight) + 1
 
     def succ(self):
         if self.right is not None:

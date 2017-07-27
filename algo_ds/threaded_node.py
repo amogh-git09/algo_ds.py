@@ -57,3 +57,4 @@ class Node(object):
         while (node.left is not None) and (not node.left_is_thread):
             node = node.left
         return node
+        
