@@ -248,6 +248,15 @@ class Node(object):
                 q.enqueue((n.right, level+1))
         return max_width
 
+    def print_nodes_at_dist_k(node, k, dist, func):
+        if node is None:
+            return
+        if k == dist:
+            func(node)
+        else:
+            Node.print_nodes_at_dist_k(node.left, k, dist+1, func)
+            Node.print_nodes_at_dist_k(node.right, k, dist+1, func)
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 

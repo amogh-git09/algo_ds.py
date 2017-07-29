@@ -79,3 +79,8 @@ class BinarySearchTree(object):
         if self.root is None:
             raise ValueError("Tree is empty")
         return self.root.width()
+
+    def print_nodes_at_dist_k(self, k, func):
+        if self.root is None:
+            raise ValueError("Tree is empty")
+        self.root.print_nodes_at_dist_k(k, 0, func)
