@@ -188,8 +188,6 @@ class Node(object):
         """
         if (not inorder):  # (not inorder) returns True if list is empty
             return None
-        # print("inorder :", inorder)
-        # print("preorder:", preorder)
         root = preorder[0]
         inorder_root_index = inorder.index(root)
         root_node = Node(root, None)
@@ -198,6 +196,31 @@ class Node(object):
         if inorder_root_index != len(inorder)-1:
             root_node.right = Node.make_tree(inorder[inorder_root_index+1:], preorder[inorder_root_index+1:])
         return root_node
+
+    def make_tree_2(inorder, il, ir, preorder, pl, pr):
+        """
+        Like make_tree but with space complexity O(n) instead of O(n^2)
+        """
+        if il > ir:
+            return None
+        root = preorder[pl]
+        root_id = Node.find_index(inorder, root, il, ir)
+        root_node = Node(root, None)
+        pl_next = pl + root_id - il # this comes from (pl + 1) + (no. of elements - 1) = (pl + 1) + ((root_id - il) - 1) = pl + root_id - il
+        root_node.left = Node.make_tree_2(inorder,  il, root_id - 1,
+                                          preorder, pl+1, pl_next)
+        root_node.right = Node.make_tree_2(inorder,  root_id+1, ir,
+                                           preorder, pl_next+1, pr)
+        return root_node
+
+    @staticmethod
+    def find_index(arr, x, l, r):
+        if l > r:
+            raise ValueError("left is greater than right index")
+        for i in range(l, r+1):
+            if arr[i] == x:
+                return i
+        raise ValueError("{} not found in {} with left={}, right={}".format(x, arr, l, r))
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)

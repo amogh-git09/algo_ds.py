@@ -68,3 +68,9 @@ class BinarySearchTree(object):
         if len(inorder) != len(preorder):
             raise ValueError("length of inorder is not equal to that of preorder")
         return BinarySearchTree(Node.make_tree(inorder, preorder))
+
+    @staticmethod
+    def make_tree_2(inorder, preorder):
+        if len(inorder) != len(preorder):
+            raise ValueError("length of inorder is not equal to that of preorder")
+        return BinarySearchTree(Node.make_tree_2(inorder, 0, len(inorder)-1, preorder, 0, len(preorder)-1))

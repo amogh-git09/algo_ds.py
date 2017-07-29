@@ -240,3 +240,26 @@ class TestBinarySearchTree(unittest.TestCase):
         pre_result = []
         tree.traversal_preorder(lambda node: pre_result.append(node.key))
         self.assertEqual(pre_result, preorder)
+
+    def test_make_tree(self):
+        inorder =  ['A','C','D','E','B','F']
+        preorder = ['C','A','D','B','E','F']
+
+        tree = BinarySearchTree.make_tree_2(inorder, preorder)
+        in_result = []
+        tree.traversal_inorder_morris(lambda node: in_result.append(node.key))
+        self.assertEqual(in_result, inorder)
+        pre_result = []
+        tree.traversal_preorder(lambda node: pre_result.append(node.key))
+        self.assertEqual(pre_result, preorder)
+
+        inorder =  ['D','B','E','A','F','C']
+        preorder = ['A','B','D','E','C','F']
+
+        tree = BinarySearchTree.make_tree_2(inorder, preorder)
+        in_result = []
+        tree.traversal_inorder_morris(lambda node: in_result.append(node.key))
+        self.assertEqual(in_result, inorder)
+        pre_result = []
+        tree.traversal_preorder(lambda node: pre_result.append(node.key))
+        self.assertEqual(pre_result, preorder)
