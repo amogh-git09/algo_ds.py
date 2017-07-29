@@ -182,6 +182,23 @@ class Node(object):
             pred = pred.right
         return pred
 
+    def make_tree(inorder, preorder):
+        """
+        Makes a tree corresponding to the inorder and preorder traversals.
+        """
+        if (not inorder):  # (not inorder) returns True if list is empty
+            return None
+        # print("inorder :", inorder)
+        # print("preorder:", preorder)
+        root = preorder[0]
+        inorder_root_index = inorder.index(root)
+        root_node = Node(root, None)
+        if inorder_root_index != 0:
+            root_node.left = Node.make_tree(inorder[0:inorder_root_index], preorder[1:inorder_root_index+1])
+        if inorder_root_index != len(inorder)-1:
+            root_node.right = Node.make_tree(inorder[inorder_root_index+1:], preorder[inorder_root_index+1:])
+        return root_node
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 

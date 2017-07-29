@@ -2,8 +2,8 @@ from algo_ds.bst_node import Node
 from algo_ds.queue import Queue
 
 class BinarySearchTree(object):
-    def __init__(self):
-        self.root = None
+    def __init__(self, root=None):
+        self.root = root
 
     def insert(self, key, val):
         if type(key) is not int:
@@ -62,3 +62,9 @@ class BinarySearchTree(object):
 
     def traversal_inorder_morris(self, func):
         self.root.traversal_inorder_morris(func)
+
+    @staticmethod
+    def make_tree(inorder, preorder):
+        if len(inorder) != len(preorder):
+            raise ValueError("length of inorder is not equal to that of preorder")
+        return BinarySearchTree(Node.make_tree(inorder, preorder))

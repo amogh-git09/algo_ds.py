@@ -68,7 +68,7 @@ class TestClone(unittest.TestCase):
         node80.random = node75
 
         clone = Node.clone_nomap(node60)
-        
+
         self.assertEqual(clone.key, 60)
         self.assertEqual(clone.left.key, 30)
         self.assertEqual(clone.right.key, 80)
