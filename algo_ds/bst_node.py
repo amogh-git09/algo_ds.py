@@ -257,6 +257,25 @@ class Node(object):
             Node.print_nodes_at_dist_k(node.left, k, dist+1, func)
             Node.print_nodes_at_dist_k(node.right, k, dist+1, func)
 
+    def operate_ancestors(node, key, func):
+        """
+        Applies function func to all the ancestors of the node
+        with the passed key.
+        """
+        if node is None:
+            return False
+        if node.key == key:
+            return True
+
+        flag_left = Node.operate_ancestors(node.left, key, func)
+        flag_right = Node.operate_ancestors(node.right, key, func)
+
+        if flag_left or flag_right:
+            func(node)
+            return True
+        else:
+            return False
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 

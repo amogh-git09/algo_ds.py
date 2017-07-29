@@ -317,4 +317,30 @@ class TestBinarySearchTree(unittest.TestCase):
         tree.insert(16, None)
         result = []
         tree.print_nodes_at_dist_k(4, lambda node: result.append(node.key))
-        self.assertEqual(sorted(result), sorted([4, 18, 77, 85]))
+        self.assertCountEqual(result, [4, 18, 77, 85])
+
+    def test_operate_ancestors(self):
+        tree = BinarySearchTree()
+        tree.insert(50, None)
+        tree.insert(20, None)
+        tree.insert(70, None)
+        tree.insert(10, None)
+        tree.insert(30, None)
+        tree.insert(75, None)
+        tree.insert(5, None)
+        tree.insert(15, None)
+        tree.insert(73, None)
+        tree.insert(80, None)
+        tree.insert(4, None)
+        tree.insert(18, None)
+        tree.insert(77, None)
+        tree.insert(85, None)
+        tree.insert(16, None)
+
+        result = []
+        tree.operate_ancestors(73, lambda node: result.append(node.key))
+        self.assertCountEqual(result, [75, 70, 50])
+
+        result = []
+        tree.operate_ancestors(85, lambda node: result.append(node.key))
+        self.assertCountEqual(result, [80, 75, 70, 50])
