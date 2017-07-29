@@ -74,3 +74,8 @@ class BinarySearchTree(object):
         if len(inorder) != len(preorder):
             raise ValueError("length of inorder is not equal to that of preorder")
         return BinarySearchTree(Node.make_tree_2(inorder, 0, len(inorder)-1, preorder, 0, len(preorder)-1))
+
+    def width(self):
+        if self.root is None:
+            raise ValueError("Tree is empty")
+        return self.root.width()

@@ -222,6 +222,32 @@ class Node(object):
                 return i
         raise ValueError("{} not found in {} with left={}, right={}".format(x, arr, l, r))
 
+    def width(self):
+        """
+        Calculates the width of the tree.
+        Time complexity:  O(n) (due to Breadth-first traversal)
+        Space complexity: O(n) (due to Breadth-first traversal queue)
+        """
+        c_width = 0
+        c_level = max_width = max_level = 1
+        q = Queue()
+        q.enqueue((self, 1))
+        while not q.is_empty():
+            n, level = q.dequeue()
+            if level != c_level:
+                if c_width > max_width:
+                    max_width = c_width
+                    max_level = c_level
+                c_width = 1
+                c_level = level
+            else:
+                c_width += 1
+            if n.left:
+                q.enqueue((n.left, level+1))
+            if n.right:
+                q.enqueue((n.right, level+1))
+        return max_width
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 
