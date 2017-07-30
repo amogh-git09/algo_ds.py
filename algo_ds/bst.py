@@ -88,3 +88,7 @@ class BinarySearchTree(object):
     def operate_ancestors(self, key, func):
         self.not_empty_or_error()
         self.root.operate_ancestors(key, func)
+
+    def is_subtree(self, sub):
+        self.not_empty_or_error()
+        return self.root.is_subtree(sub.root)

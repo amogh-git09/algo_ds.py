@@ -276,6 +276,25 @@ class Node(object):
         else:
             return False
 
+    def is_subtree(self, sub):
+        """
+        Checks if sub is a subtree of self.
+        """
+        n = self.search_iter(sub.key)
+        return Node.is_equal(n, sub)
+
+    def is_equal(n1, n2):
+        """
+        Checks if trees with n1 and n2 are the same.
+        """
+        if n1 is None and n2 is None:
+            return True
+        if n1 is None or n2 is None:
+            return False
+        if n1.key == n2.key and n1.val == n2.val:
+            return Node.is_equal(n1.left, n2.left) and Node.is_equal(n1.right, n2.right)
+        return False
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 
