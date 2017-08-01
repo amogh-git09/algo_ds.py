@@ -378,3 +378,32 @@ class TestBinarySearchTree(unittest.TestCase):
         tree2.insert(5, None)
         tree2.insert(15, None)
         self.assertEqual(tree.is_subtree(tree2), False)
+
+    def test_subtree(self):
+        tree = BinarySearchTree()
+        tree.insert(50, None)
+        tree.insert(30, None)
+        tree.insert(20, None)
+        tree.insert(40, None)
+        tree.insert(70, None)
+        tree.insert(60, None)
+        tree.insert(80, None)
+
+        result = []
+        tree.traversal_inorder(lambda node: result.append(node.key))
+        self.assertEqual(result, [20, 30, 40, 50, 60, 70, 80])
+
+        tree.delete(20)
+        result = []
+        tree.traversal_inorder(lambda node: result.append(node.key))
+        self.assertEqual(result, [30, 40, 50, 60, 70, 80])
+
+        tree.delete(30)
+        result = []
+        tree.traversal_inorder(lambda node: result.append(node.key))
+        self.assertEqual(result, [40, 50, 60, 70, 80])
+
+        tree.delete(70)
+        result = []
+        tree.traversal_inorder(lambda node: result.append(node.key))
+        self.assertEqual(result, [40, 50, 60, 80])

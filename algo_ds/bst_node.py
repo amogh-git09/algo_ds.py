@@ -39,6 +39,29 @@ class Node(object):
             p.left = node
             node.parent = p
 
+    def delete(root, key):
+        if root is None:
+            return None
+        if key < root.key:
+            root.left = root.left.delete(key)
+        elif key > root.key:
+            root.right = root.right.delete(key)
+        else:
+            if root.left is None:
+                tmp = root.right
+                root.right = None
+                return tmp
+            elif root.right is None:
+                tmp = root.left
+                root.left = None
+                return tmp
+            else:
+                succ = Node.minimum(root.right)
+                root.key = succ.key
+                root.val = succ.val
+                root.right = root.right.delete(succ.key)
+        return root
+
     def traversal_inorder(self, func):
         if self.left is not None:
             self.left.traversal_inorder(func)

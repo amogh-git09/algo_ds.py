@@ -14,6 +14,10 @@ class BinarySearchTree(object):
         else:
             self.root.insert_iter(node)
 
+    def delete(self, key):
+        self.not_empty_or_error()
+        self.root.delete(key)
+
     def traversal_inorder(self, func):
         if self.root is None:
             raise ValueError("Tree is empty")
