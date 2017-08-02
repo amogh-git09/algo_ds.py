@@ -1,4 +1,5 @@
 from algo_ds.bst import BinarySearchTree
+from algo_ds.bst_node import Node
 import unittest
 
 class TestBinarySearchTree(unittest.TestCase):
@@ -415,6 +416,38 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual([x.key if x is not None else None for x in tree.pred_succ(20)], [None, 30])
         self.assertEqual([x.key for x in tree.pred_succ(40)], [30, 50])
         self.assertEqual([x.key for x in tree.pred_succ(60)], [50, 70])
+
+    def test_validate(self):
+        tree = TestBinarySearchTree.test_tree()
+        self.assertEqual(tree.validate(), True)
+
+        tree = BinarySearchTree()
+        tree.root = Node(50)
+        tree.root.left = Node(60)
+        self.assertEqual(tree.validate(), False)
+
+        tree = BinarySearchTree()
+        tree.root = Node(50)
+        tree.root.left = Node(40)
+        tree.root.right = Node(10)
+        self.assertEqual(tree.validate(), False)
+
+        tree = BinarySearchTree()
+        tree.root = Node(50)
+        tree.root.left = Node(30)
+        tree.root.right = Node(70)
+        tree.root.right.right = Node(80)
+        tree.root.right.right.left = Node(90)
+        self.assertEqual(tree.validate(), False)
+
+        tree = BinarySearchTree()
+        tree.root = Node(50)
+        tree.root.left = Node(30)
+        tree.root.left.right = Node(20)
+        tree.root.right = Node(70)
+        tree.root.right.right = Node(80)
+        tree.root.right.right.left = Node(90)
+        self.assertEqual(tree.validate(), False)
 
     @staticmethod
     def test_tree():

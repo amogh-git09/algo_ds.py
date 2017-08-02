@@ -100,3 +100,7 @@ class BinarySearchTree(object):
     def pred_succ(self, key):
         self.not_empty_or_error()
         return self.root.pred_succ(key)
+
+    def validate(self):
+        self.not_empty_or_error()
+        return self.root.validate() 

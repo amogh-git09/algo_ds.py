@@ -349,6 +349,31 @@ class Node(object):
             res = res.left
         return res
 
+    def validate(self):
+        """
+        Validates the BST
+        """
+        return self.validate_rec()[0]
+
+    def validate_rec(root):
+        if root is None:
+            return (True, None, None)
+        if root.left is None and root.right is None:
+            # leaf
+            return (True, root.key, root.key)
+        lok, lmin, lmax = Node.validate_rec(root.left)
+        rok, rmin, rmax = Node.validate_rec(root.right)
+        if not (lok and rok):
+            return (False, None, None)
+        if root.left is None:
+            lmax = root.key
+        if root.right is None:
+            rmin = root.key
+        if lmax < root.key and root.key < rmin:
+            return (True, lmax, rmin)
+        else:
+            return (False, None, None)
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 
