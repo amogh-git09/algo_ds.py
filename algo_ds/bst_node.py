@@ -2,7 +2,7 @@ from algo_ds.queue import Queue
 from algo_ds.stack import Stack
 
 class Node(object):
-    def __init__(self, key, val):
+    def __init__(self, key, val=None):
         self.key = key
         self.val = val
         self.left = None
@@ -277,8 +277,8 @@ class Node(object):
         if k == dist:
             func(node)
         else:
-            Node.print_nodes_at_dist_k(node.left, k, dist+1, func)
             Node.print_nodes_at_dist_k(node.right, k, dist+1, func)
+            Node.print_nodes_at_dist_k(node.left, k, dist+1, func)
 
     def operate_ancestors(node, key, func):
         """
@@ -317,6 +317,37 @@ class Node(object):
         if n1.key == n2.key and n1.val == n2.val:
             return Node.is_equal(n1.left, n2.left) and Node.is_equal(n1.right, n2.right)
         return False
+
+    def pred_succ(root, key):
+        if root.key == key:
+            pred = succ = None
+            if root.left:
+                pred = root.left.max_node()
+            if root.right:
+                succ = root.right.min_node()
+            return (pred, succ)
+        elif key < root.key:
+            pred, succ = root.left.pred_succ(key)
+            if succ is None:
+                succ = root
+            return (pred, succ)
+        else:
+            pred, succ = root.right.pred_succ(key)
+            if pred is None:
+                pred = root
+            return (pred, succ)
+
+    def max_node(self):
+        res = self
+        while res.right:
+            res = res.right
+        return res
+
+    def min_node(self):
+        res = self
+        while res.left:
+            res = res.left
+        return res
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)

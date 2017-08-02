@@ -96,3 +96,7 @@ class BinarySearchTree(object):
     def is_subtree(self, sub):
         self.not_empty_or_error()
         return self.root.is_subtree(sub.root)
+
+    def pred_succ(self, key):
+        self.not_empty_or_error()
+        return self.root.pred_succ(key)
