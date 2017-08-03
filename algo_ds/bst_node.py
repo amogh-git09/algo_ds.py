@@ -374,6 +374,20 @@ class Node(object):
         else:
             return (False, None, None)
 
+    def lowest_common_ancestor(root, n1, n2):
+        """
+        Returns the lowest common ancestor of the nodes with keys
+        n1 and n2. This method assumes that the two keys n1 and n2
+        do exist in the tree.
+        """
+        if root is None:
+            return None
+        if root.key > n1 and root.key > n2:
+            return Node.lowest_common_ancestor(root.left, n1, n2)
+        if root.key < n1 and root.key < n2:
+            return Node.lowest_common_ancestor(root.right, n1, n2)
+        return root
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 

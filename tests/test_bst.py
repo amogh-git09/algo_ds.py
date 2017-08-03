@@ -449,6 +449,15 @@ class TestBinarySearchTree(unittest.TestCase):
         tree.root.right.right.left = Node(90)
         self.assertEqual(tree.validate(), False)
 
+    def test_lowest_common_ancestor(self):
+        tree = TestBinarySearchTree.test_tree()
+        self.assertEqual(tree.lowest_common_ancestor(50, 50).key, 50)
+        self.assertEqual(tree.lowest_common_ancestor(50, 80).key, 50)
+        self.assertEqual(tree.lowest_common_ancestor(60, 80).key, 70)
+        self.assertEqual(tree.lowest_common_ancestor(40, 30).key, 30)
+        self.assertEqual(tree.lowest_common_ancestor(60, 80).key, 70)
+        self.assertEqual(tree.lowest_common_ancestor(20, 30).key, 30)
+
     @staticmethod
     def test_tree():
         tree = BinarySearchTree()

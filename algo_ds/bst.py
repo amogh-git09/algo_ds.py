@@ -103,4 +103,8 @@ class BinarySearchTree(object):
 
     def validate(self):
         self.not_empty_or_error()
-        return self.root.validate() 
+        return self.root.validate()
+
+    def lowest_common_ancestor(self, key1, key2):
+        self.not_empty_or_error()
+        return self.root.lowest_common_ancestor(key1, key2)
