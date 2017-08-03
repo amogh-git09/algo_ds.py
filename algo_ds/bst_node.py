@@ -388,26 +388,25 @@ class Node(object):
             return Node.lowest_common_ancestor(root.right, n1, n2)
         return root
 
-    def inorder_succ(root, key):
+    def inorder_succ(self, key):
         """
         This method returns the inorder successor of the node with
         the provided key. If the key does not exist in the tree then
         this method will still return the node which would be the
         inorder successor if the key existed.
         """
-        if root is None:
-            # key not found in the tree
-            return None
-        if root.key == key:
-            if root.right:
-                return root.right.min_node()
-            return None
-        if root.key < key:
-            return Node.inorder_succ(root.right, key)
-        succ = Node.inorder_succ(root.left, key)
-        if succ is None:
-            return root
-        return succ
+        succ = None
+        node = self
+        while node:
+            if node.key == key:
+                if node.right:
+                    return node.right.min_node()
+                return succ
+            elif node.key < key:
+                node = node.right
+            else:
+                succ = node
+                node = node.left
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
