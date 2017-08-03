@@ -108,3 +108,7 @@ class BinarySearchTree(object):
     def lowest_common_ancestor(self, key1, key2):
         self.not_empty_or_error()
         return self.root.lowest_common_ancestor(key1, key2)
+
+    def inorder_succ(self, key):
+        self.not_empty_or_error()
+        return self.root.inorder_succ(key)

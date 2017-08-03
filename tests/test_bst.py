@@ -458,6 +458,16 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.lowest_common_ancestor(60, 80).key, 70)
         self.assertEqual(tree.lowest_common_ancestor(20, 30).key, 30)
 
+    def test_inorder_succ(self):
+        tree = TestBinarySearchTree.test_tree()
+        self.assertEqual(tree.inorder_succ(20).key, 30)
+        self.assertEqual(tree.inorder_succ(30).key, 40)
+        self.assertEqual(tree.inorder_succ(40).key, 50)
+        self.assertEqual(tree.inorder_succ(50).key, 60)
+        self.assertEqual(tree.inorder_succ(60).key, 70)
+        self.assertEqual(tree.inorder_succ(70).key, 80)
+        self.assertEqual(tree.inorder_succ(80), None)
+
     @staticmethod
     def test_tree():
         tree = BinarySearchTree()
