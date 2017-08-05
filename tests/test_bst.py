@@ -468,6 +468,18 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.inorder_succ(70).key, 80)
         self.assertEqual(tree.inorder_succ(80), None)
 
+    def test_kth_smallest(self):
+        tree = TestBinarySearchTree.test_tree()
+        self.assertEqual(tree.kth_smallest(0), None)
+        self.assertEqual(tree.kth_smallest(1).key, 20)
+        self.assertEqual(tree.kth_smallest(2).key, 30)
+        self.assertEqual(tree.kth_smallest(3).key, 40)
+        self.assertEqual(tree.kth_smallest(4).key, 50)
+        self.assertEqual(tree.kth_smallest(5).key, 60)
+        self.assertEqual(tree.kth_smallest(6).key, 70)
+        self.assertEqual(tree.kth_smallest(7).key, 80)
+        self.assertEqual(tree.kth_smallest(8), None)
+
     @staticmethod
     def test_tree():
         tree = BinarySearchTree()

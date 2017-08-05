@@ -408,6 +408,20 @@ class Node(object):
                 succ = node
                 node = node.left
 
+    def kth_smallest(root, i, k):
+        if root is None:
+            return (i, None)
+        i, res = Node.kth_smallest(root.left, i, k)
+        if res:
+            return i, res
+        i += 1
+        if i == k:
+            return i, root
+        i, res = Node.kth_smallest(root.right, i, k)
+        if res:
+            return i, res
+        return i, None
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 

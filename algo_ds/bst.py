@@ -112,3 +112,7 @@ class BinarySearchTree(object):
     def inorder_succ(self, key):
         self.not_empty_or_error()
         return self.root.inorder_succ(key)
+
+    def kth_smallest(self, k):
+        self.not_empty_or_error()
+        return self.root.kth_smallest(0, k)[1]
