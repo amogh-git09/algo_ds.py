@@ -170,16 +170,17 @@ class Node(object):
             2 + Node.height(node.left) + Node.height(node.right))
 
     def traversal_inorder_iter(self, func):
-        stack = Stack()
-        Node.insert_lefts(self, stack)
-        while not stack.is_empty():
-            n = stack.pop()
+        n = self
+        s = Stack()
+        Node.insert_lefts(n, s)
+        while not s.is_empty():
+            n = s.pop()
             func(n)
-            Node.insert_lefts(n.right, stack)
+            Node.insert_lefts(n.right, s)
 
     def insert_lefts(self, stack):
         n = self
-        while n is not None:
+        while n:
             stack.push(n)
             n = n.left
 
@@ -421,6 +422,60 @@ class Node(object):
         if res:
             return i, res
         return i, None
+
+    def inorder_two_trees(root1, root2, func):
+        s1 = Stack()
+        s2 = Stack()
+        Node.insert_lefts(root1, s1)
+        Node.insert_lefts(root2, s2)
+        while (not s1.is_empty()) or (not s2.is_empty()):
+            if (not s1.is_empty()) and (not s2.is_empty()):
+                if s1.peek().key <= s2.peek().key:
+                    n = s1.pop()
+                    func(n)
+                    Node.insert_lefts(n.right, s1)
+                else:
+                    n = s2.pop()
+                    func(n)
+                    Node.insert_lefts(n.right, s2)
+            else:
+                if s1.is_empty():
+                    n = s2.pop()
+                    func(n)
+                    Node.insert_lefts(n.right, s2)
+                else:
+                    n = s1.pop()
+                    func(n)
+                    Node.insert_lefts(n.right, s1)
+
+    def correct_swapped_nodes(self):
+        stack = Stack()
+        prev = first = mid = last = None
+        n = self
+        Node.insert_lefts(n, stack)
+        while not stack.is_empty():
+            n = stack.pop()
+            Node.insert_lefts(n.right, stack)
+            if prev:
+                if n.key < prev.key:
+                    if first is None:
+                        first = prev
+                        mid = n
+                    else:
+                        last = n
+                        break
+            prev = n
+
+        # swap
+        if last:
+            Node.swap(first, last)
+        else:
+            Node.swap(first, mid)
+
+    def swap(node1, node2):
+        tmp = Node(node1.key, node1.val)
+        node1.key, node1.val = node2.key, node2.val
+        node2.key, node2.val = tmp.key, tmp.val
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)

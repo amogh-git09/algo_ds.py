@@ -480,6 +480,48 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.kth_smallest(7).key, 80)
         self.assertEqual(tree.kth_smallest(8), None)
 
+    def test_inorder_two_trees(self):
+        tree1 = TestBinarySearchTree.test_tree()
+        tree2 = BinarySearchTree()
+        tree2.insert(30, None)
+        tree2.insert(28, None)
+        tree2.insert(14, None)
+        tree2.insert(67, None)
+        tree2.insert(77, None)
+        result = []
+        BinarySearchTree.inorder_two_trees(tree1, tree2, lambda node: result.append(node.key))
+        self.assertEqual(result, [14, 20, 28, 30, 30, 40, 50, 60, 67, 70, 77, 80])
+
+    def test_swap(self):
+        tree = TestBinarySearchTree.test_tree()
+        node = tree.root.left.left
+        old_root_key = tree.root.key
+        old_node_key = node.key
+        Node.swap(tree.root, node)
+        self.assertEqual(tree.root.key, old_node_key)
+        self.assertEqual(node.key, old_root_key)
+
+    def test_correct_swapped_nodes(self):
+        tree = TestBinarySearchTree.test_tree()
+        result = []
+        tree.traversal_inorder_iter(lambda node: result.append(node.key))
+
+        node = tree.root.left.left
+        Node.swap(tree.root, node)
+        tree.correct_swapped_nodes()
+
+        result2 = []
+        tree.traversal_inorder_iter(lambda node: result2.append(node.key))
+        self.assertEqual(result, result2)
+
+        node = tree.root.left.left
+        Node.swap(tree.root.left, node)
+        tree.correct_swapped_nodes()
+
+        result2 = []
+        tree.traversal_inorder_iter(lambda node: result2.append(node.key))
+        self.assertEqual(result, result2)
+
     @staticmethod
     def test_tree():
         tree = BinarySearchTree()

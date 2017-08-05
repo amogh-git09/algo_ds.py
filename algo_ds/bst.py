@@ -116,3 +116,12 @@ class BinarySearchTree(object):
     def kth_smallest(self, k):
         self.not_empty_or_error()
         return self.root.kth_smallest(0, k)[1]
+
+    def inorder_two_trees(tree1, tree2, func):
+        tree1.not_empty_or_error()
+        tree2.not_empty_or_error()
+        return Node.inorder_two_trees(tree1.root, tree2.root, func)
+
+    def correct_swapped_nodes(self):
+        self.not_empty_or_error()
+        self.root.correct_swapped_nodes()
