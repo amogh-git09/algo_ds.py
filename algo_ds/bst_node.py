@@ -477,6 +477,45 @@ class Node(object):
         node1.key, node1.val = node2.key, node2.val
         node2.key, node2.val = tmp.key, tmp.val
 
+    def ceil(root, key):
+        if root is None:
+            return None
+        if root.key == key:
+            return root
+        if root.key < key:
+            return Node.ceil(root.right, key)
+        res = Node.ceil(root.left, key)
+        if res:
+            return res
+        else:
+            return root
+
+    def ceil_iter(self, key):
+        ceil = None
+        n = self
+        while n:
+            if n.key == key:
+                return n
+            if n.key < key:
+                n = n.right
+            else:
+                ceil = n
+                n = n.left
+        return ceil
+
+    def floor_iter(self, key):
+        floor = None
+        n = self
+        while n:
+            if n.key == key:
+                return n
+            if n.key < key:
+                floor = n
+                n = n.right
+            else:
+                n = n.left
+        return floor
+
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
 

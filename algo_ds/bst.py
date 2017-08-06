@@ -67,6 +67,18 @@ class BinarySearchTree(object):
     def traversal_inorder_morris(self, func):
         self.root.traversal_inorder_morris(func)
 
+    def ceil(self, key):
+        self.not_empty_or_error()
+        return self.root.ceil(key)
+
+    def ceil_iter(self, key):
+        self.not_empty_or_error()
+        return self.root.ceil_iter(key)
+
+    def floor(self, key):
+        self.not_empty_or_error()
+        return self.root.floor_iter(key)
+
     @staticmethod
     def make_tree(inorder, preorder):
         if len(inorder) != len(preorder):

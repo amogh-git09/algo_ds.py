@@ -522,6 +522,36 @@ class TestBinarySearchTree(unittest.TestCase):
         tree.traversal_inorder_iter(lambda node: result2.append(node.key))
         self.assertEqual(result, result2)
 
+    def test_ceil(self):
+        tree = TestBinarySearchTree.test_tree()
+        self.assertEqual(tree.ceil(25).key, 30)
+        self.assertEqual(tree.ceil(80).key, 80)
+        self.assertEqual(tree.ceil(85), None)
+        self.assertEqual(tree.ceil(0).key, 20)
+        self.assertEqual(tree.ceil(15).key, 20)
+        self.assertEqual(tree.ceil(39).key, 40)
+        self.assertEqual(tree.ceil(58).key, 60)
+
+    def test_ceil_iter(self):
+        tree = TestBinarySearchTree.test_tree()
+        self.assertEqual(tree.ceil_iter(25).key, 30)
+        self.assertEqual(tree.ceil_iter(80).key, 80)
+        self.assertEqual(tree.ceil_iter(85), None)
+        self.assertEqual(tree.ceil_iter(0).key, 20)
+        self.assertEqual(tree.ceil_iter(15).key, 20)
+        self.assertEqual(tree.ceil_iter(39).key, 40)
+        self.assertEqual(tree.ceil_iter(58).key, 60)
+
+    def test_floor(self):
+        tree = TestBinarySearchTree.test_tree()
+        self.assertEqual(tree.floor(25).key, 20)
+        self.assertEqual(tree.floor(80).key, 80)
+        self.assertEqual(tree.floor(85).key, 80)
+        self.assertEqual(tree.floor(0), None)
+        self.assertEqual(tree.floor(15), None)
+        self.assertEqual(tree.floor(39).key, 30)
+        self.assertEqual(tree.floor(58).key, 50)
+
     @staticmethod
     def test_tree():
         tree = BinarySearchTree()
