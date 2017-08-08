@@ -143,5 +143,13 @@ class DNode(object):
 
         return mid
 
+    def length(self):
+        n = self
+        count = 0
+        while n:
+            count += 1
+            n = n.next
+        return count
+
     def __str__(self):
         return str(self.val)
