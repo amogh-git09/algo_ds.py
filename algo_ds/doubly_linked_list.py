@@ -53,6 +53,9 @@ class DoublyLinkedList(object):
     def merge_sort(self):
         self.head = DNode.merge_sort(self.head)
 
+    def dll_to_tree(self):
+        return self.head.dll_to_tree()
+
     def __str__(self):
         if self.head == None:
             return ""

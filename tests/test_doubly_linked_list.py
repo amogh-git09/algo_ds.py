@@ -102,5 +102,24 @@ class TestDoublyLinkedList(unittest.TestCase):
         dll.insert_at_end(DNode(3))
         self.assertEqual(str(dll), "3 -> None")
 
+    def test_dll_to_tree(self):
+        dll = DoublyLinkedList()
+        dll.insert_at_end(DNode(1))
+        dll.insert_at_end(DNode(2))
+        dll.insert_at_end(DNode(3))
+        dll.insert_at_end(DNode(4))
+        dll.insert_at_end(DNode(5))
+        dll.insert_at_end(DNode(6))
+        dll.insert_at_end(DNode(7))
+        root = dll.dll_to_tree()
+        self.assertEqual(root.val, 4)
+        self.assertEqual(root.prev.val, 2)
+        self.assertEqual(root.next.val, 6)
+        self.assertEqual(root.prev.prev.val, 1)
+        self.assertEqual(root.prev.next.val, 3)
+        self.assertEqual(root.next.prev.val, 5)
+        self.assertEqual(root.next.next.val, 7)
+        self.assertEqual(root.next.prev.prev, None)
+
 if __name__ == '__main__':
     unittest.main()
