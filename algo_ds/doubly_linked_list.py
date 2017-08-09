@@ -56,6 +56,24 @@ class DoublyLinkedList(object):
     def sum_exists(self, val):
         return self.head.sum_exists(val)
 
+    def dll_to_tree(self):
+        return self.head.dll_to_tree()
+
+    def dll_to_tree2(self):
+        n = self.head.length()
+        return self.dll_to_tree2_rec(n)
+
+    def dll_to_tree2_rec(self, n):
+        if n <= 0:
+            return None
+        left = DoublyLinkedList.dll_to_tree2_rec(self, n//2)
+        root = self.head
+        root.prev = left
+        self.head = self.head.next
+        right = DoublyLinkedList.dll_to_tree2_rec(self, n - n//2 - 1)
+        root.next = right
+        return root
+
     def __str__(self):
         if self.head == None:
             return ""

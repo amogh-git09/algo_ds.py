@@ -144,5 +144,35 @@ class DNode(object):
                 start = start.next
         return False
 
+    def dll_to_tree(node):
+        if node is None:
+            return None
+        mid = node.find_middle()
+
+        if mid.prev:
+            mid.prev.next = None
+        right = mid.next
+        if mid.next:
+            mid.next.prev = None
+
+        if node is not mid:
+            mid.prev = DNode.dll_to_tree(node)
+        else:
+            mid.prev = None
+        if right is not mid:
+            mid.next = DNode.dll_to_tree(right)
+        else:
+            mid.next = None
+
+        return mid
+
+    def length(self):
+        n = self
+        count = 0
+        while n:
+            count += 1
+            n = n.next
+        return count
+
     def __str__(self):
         return str(self.val)

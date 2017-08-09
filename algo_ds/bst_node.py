@@ -520,7 +520,6 @@ class Node(object):
     def sum_exists(root, sum):
         dll = DoublyLinkedList()
         root.traversal_inorder_iter(lambda node: dll.insert_at_end(node))
-        
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
