@@ -53,6 +53,9 @@ class DoublyLinkedList(object):
     def merge_sort(self):
         self.head = DNode.merge_sort(self.head)
 
+    def sum_exists(self, val):
+        return self.head.sum_exists(val)
+
     def __str__(self):
         if self.head == None:
             return ""

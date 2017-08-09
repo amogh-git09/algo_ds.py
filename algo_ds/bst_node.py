@@ -1,5 +1,6 @@
 from algo_ds.queue import Queue
 from algo_ds.stack import Stack
+from algo_ds.doubly_linked_list import DoublyLinkedList
 
 class Node(object):
     def __init__(self, key, val=None):
@@ -515,6 +516,11 @@ class Node(object):
             else:
                 n = n.left
         return floor
+
+    def sum_exists(root, sum):
+        dll = DoublyLinkedList()
+        root.traversal_inorder_iter(lambda node: dll.insert_at_end(node))
+        
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)

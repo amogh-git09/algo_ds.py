@@ -121,5 +121,28 @@ class DNode(object):
         head.insert_at_end(node)
         return node_next
 
+    def get_last(self):
+        n = self
+        while n.next:
+            n = n.next
+        return n
+
+    def sum_exists(self, val):
+        """
+        Checks if two values add up to val.
+        This method assumes that the linked list is sorted.
+        """
+        start = self
+        end = start.get_last()
+        while end.next is not start:
+            add = start.val + end.val
+            if add == val:
+                return True
+            else if add > val:
+                end = end.prev
+            else:
+                start = start.next
+        return False
+
     def __str__(self):
         return str(self.val)
