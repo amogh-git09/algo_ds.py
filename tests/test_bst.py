@@ -552,6 +552,12 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.floor(39).key, 30)
         self.assertEqual(tree.floor(58).key, 50)
 
+    def test_sum_exists(self):
+        tree = TestBinarySearchTree.test_tree()
+        self.assertEqual(tree.sum_exists(80), True)
+        self.assertEqual(tree.sum_exists(130), True)
+        self.assertEqual(tree.sum_exists(15), False)
+
     @staticmethod
     def test_tree():
         tree = BinarySearchTree()

@@ -126,6 +126,14 @@ class TestDoublyLinkedList(unittest.TestCase):
         self.assertEqual(root.next.next.val, 7)
         self.assertEqual(root.next.prev.prev, None)
 
+    def test_sum_exists(self):
+        dll = TestDoublyLinkedList.get_test_dll()
+        self.assertEqual(dll.sum_exists(3), True)
+        self.assertEqual(dll.sum_exists(-3), False)
+        self.assertEqual(dll.sum_exists(8), True)
+        self.assertEqual(dll.sum_exists(10), True)
+        self.assertEqual(dll.sum_exists(20), False)
+
     def get_test_dll():
         dll = DoublyLinkedList()
         dll.insert_at_end(DNode(1))

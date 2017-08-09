@@ -137,3 +137,7 @@ class BinarySearchTree(object):
     def correct_swapped_nodes(self):
         self.not_empty_or_error()
         self.root.correct_swapped_nodes()
+
+    def sum_exists(self, val):
+        self.not_empty_or_error()
+        return self.root.sum_exists(val)

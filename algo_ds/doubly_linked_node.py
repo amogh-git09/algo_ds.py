@@ -134,11 +134,11 @@ class DNode(object):
         """
         start = self
         end = start.get_last()
-        while end.next is not start:
+        while start and end and (end.next is not start):
             add = start.val + end.val
             if add == val:
                 return True
-            else if add > val:
+            elif add > val:
                 end = end.prev
             else:
                 start = start.next
