@@ -211,6 +211,9 @@ class Node(object):
                     n = n.right
 
     def find_pred(self):
+        """
+        Finds pred in threaded binary tree
+        """
         pred = self.left
         while (pred.right is not None) and (pred.right is not self):
             pred = pred.right
@@ -418,6 +421,57 @@ class Node(object):
             else:
                 succ = node
                 node = node.left
+
+    def inorder_succ_node(self, n):
+        """
+        Returns inorder successor of node n.
+        """
+        succ = None
+        node = self
+        while node:
+            if node is n:
+                if node.right:
+                    return node.right.min_node()
+                return succ
+            elif node < n:
+                node = node.right
+            else:
+                succ = node
+                node = node.left
+
+    def inorder_pred(self, key):
+        """
+        Returns the inorder predecessor of node with key.
+        """
+        pred = None
+        node = self
+        while node:
+            if node.key == key:
+                if node.left:
+                    return node.left.max_node()
+                return pred
+            elif node.key > key:
+                node = node.left
+            else:
+                pred = node
+                node = node.right
+
+    def inorder_pred_node(self, n):
+        """
+        Returns the inorder predecessor of node n.
+        """
+        pred = None
+        node = self
+        while node:
+            if node is n:
+                if node.left:
+                    return node.left.max_node()
+                return pred
+            elif node > n:
+                node = node.left
+            else:
+                pred = node
+                node = node.right
 
     def kth_smallest(root, i, k):
         if root is None:
