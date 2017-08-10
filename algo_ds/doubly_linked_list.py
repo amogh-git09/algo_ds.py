@@ -4,7 +4,8 @@ class DoublyLinkedList(object):
     def __init__(self, head=None):
         self.head = head
 
-    def insert_at_front(self, node):
+    def insert_at_front(self, val):
+        node = DNode(val)
         if self.head == None:
             self.head = node
             node.next = None
@@ -14,7 +15,8 @@ class DoublyLinkedList(object):
         self.head.insert_before(node)
         self.head = node
 
-    def insert_at_end(self, node):
+    def insert_at_end(self, val):
+        node = DNode(val)
         if self.head == None:
             self.head = node
             node.next = node.prev = None
@@ -58,6 +60,9 @@ class DoublyLinkedList(object):
 
     def dll_to_tree(self):
         return self.head.dll_to_tree()
+
+    def length(self):
+        return self.head.length()
 
     def dll_to_tree2(self):
         n = self.head.length()

@@ -568,6 +568,18 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.sum_exists2(100), True)
         self.assertEqual(tree.sum_exists2(40), False)
 
+    def test_merge(self):
+        tree1 = TestBinarySearchTree.test_tree()
+        tree2 = BinarySearchTree()
+        tree2.insert(10, None)
+        tree2.insert(15, None)
+        tree2.insert(35, None)
+        tree2.insert(55, None)
+        tree = BinarySearchTree.merge(tree1, tree2)
+        result = []
+        tree.traversal_inorder_iter(lambda node: result.append(node.key))
+        self.assertEqual(result, [10, 15, 20, 30, 35, 40, 50, 55, 60, 70, 80])
+
     @staticmethod
     def test_tree():
         tree = BinarySearchTree()

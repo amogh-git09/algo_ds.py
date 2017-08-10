@@ -2,7 +2,9 @@ from algo_ds.queue import Queue
 from algo_ds.stack import Stack
 from algo_ds.doubly_linked_list import DoublyLinkedList
 from algo_ds.doubly_linked_node import DNode
+from functools import total_ordering
 
+@total_ordering
 class Node(object):
     def __init__(self, key, val=None):
         self.key = key
@@ -545,6 +547,35 @@ class Node(object):
                 n = s2.pop()
                 Node.insert_rights(n.left, s2)
         return False
+
+    def to_dll(self):
+        dll = DoublyLinkedList()
+        self.traversal_inorder_iter(lambda node: dll.insert_at_end(node))
+        return dll
+
+    def dll_to_tree(dll, n):
+        if n <= 0:
+            return None
+        left = Node.dll_to_tree(dll, n//2)
+        root = dll.head.val
+        dll.head = dll.head.next
+        right = Node.dll_to_tree(dll, n - n//2 - 1)
+        root.left = left
+        root.right = right
+        return root
+
+    def merge(root1, root2):
+        dll1 = root1.to_dll()
+        dll2 = root2.to_dll()
+        merged_dll = DoublyLinkedList.merge(dll1, dll2)
+        n = merged_dll.length()
+        return Node.dll_to_tree(merged_dll, n)
+
+    def __eq__(self, other):
+        return self.key == other.key
+
+    def __lt__(self, other):
+        return self.key < other.key
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
