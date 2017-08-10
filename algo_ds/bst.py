@@ -141,3 +141,7 @@ class BinarySearchTree(object):
     def sum_exists(self, val):
         self.not_empty_or_error()
         return self.root.sum_exists(val)
+
+    def sum_exists2(self, val):
+        self.not_empty_or_error()
+        return self.root.sum_exists2(val)

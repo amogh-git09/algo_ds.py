@@ -186,6 +186,12 @@ class Node(object):
             stack.push(n)
             n = n.left
 
+    def insert_rights(self, stack):
+        n = self
+        while n:
+            stack.push(n)
+            n = n.right
+
     def traversal_inorder_morris(self, func):
         n = self
         while n is not None:
@@ -522,6 +528,23 @@ class Node(object):
         dll = DoublyLinkedList()
         root.traversal_inorder_iter(lambda node: dll.insert_at_end(DNode(node.key)))
         return dll.sum_exists(val)
+
+    def sum_exists2(root, add):
+        s1 = Stack()
+        s2 = Stack()
+        root.insert_lefts(s1)
+        root.insert_rights(s2)
+        while s1.peek() is not s2.peek():
+            res = s1.peek().key + s2.peek().key
+            if res == add:
+                return True
+            elif res < add:
+                n = s1.pop()
+                Node.insert_lefts(n.right, s1)
+            else:
+                n = s2.pop()
+                Node.insert_rights(n.left, s2)
+        return False
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
