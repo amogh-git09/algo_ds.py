@@ -133,5 +133,70 @@ class Node(object):
         # remove cycle
         prev.next = None
 
+    def remove_from_end(self):
+        n = self
+        nn = n.next
+        while nn.next != None:
+            nn = nn.next
+            n = n.next
+        n.next = None
+        return nn
+
+    def length(self):
+        count = 1
+        n = self
+        while n.next != None:
+            n = n.next
+            count += 1
+        return count
+
+    def swap(self, a, b):
+        head = self
+
+        # find a
+        prev_a = None
+        n = self
+        while n != None and n.val != a:
+            prev_a = n
+            n = n.next
+        if n == None:
+            raise NotFoundError("Could not find element:", a)
+        a_node = n
+
+        # find b
+        prev_b = None
+        n = self
+        while n != None and n.val != b:
+            prev_b = n
+            n = n.next
+        if n == None:
+            raise NotFoundError("Could not find element:", b)
+        b_node = n
+
+        # set prev pointers
+        if prev_a != None:
+            prev_a.next = b_node
+        else:
+            head = b_node
+        if prev_b != None:
+            prev_b.next = a_node
+        else:
+            head = a_node
+
+        # set next pointers
+        tmp = a_node.next
+        a_node.next = b_node.next
+        b_node.next = tmp
+
+        return head
+
+    def as_python_list(self):
+        n = self
+        result = []
+        while n is not None:
+            result.append(n.val)
+            n = n.next
+        return result
+
     def __str__(self):
         return str(self.val)

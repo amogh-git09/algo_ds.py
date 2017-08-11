@@ -1,5 +1,5 @@
 import unittest
-from algo_ds.node import Node
+from algo_ds.linked_list_node import Node
 
 class TestNode(unittest.TestCase):
     def test_construct(self):

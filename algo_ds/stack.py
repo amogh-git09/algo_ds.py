@@ -1,5 +1,5 @@
 from algo_ds.linked_list import LinkedList
-from algo_ds.node import Node
+from algo_ds.linked_list_node import Node
 
 class Stack(object):
     def __init__(self):
