@@ -32,7 +32,7 @@ class LinkedList(object):
         if nn is None:
             self.head = None
             return n.val
-        return self.head.remove_from_end()
+        return self.head.remove_from_end().val
 
     def length(self):
         if self.head == None:

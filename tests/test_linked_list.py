@@ -11,6 +11,15 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(ll.head.next.val, 2)
         self.assertEqual(ll.head.next.next.val, 1)
 
+    def test_insert_at_end(self):
+        ll = LinkedList()
+        ll.insert_at_end(1)
+        ll.insert_at_end(2)
+        ll.insert_at_end(3)
+        self.assertEqual(ll.head.val, 1)
+        self.assertEqual(ll.head.next.val, 2)
+        self.assertEqual(ll.head.next.next.val, 3)
+
     def test_remove(self):
         ll = self.get_test_list()
         self.assertEqual(ll.as_python_list(), [50, 80, 40, 60, 10, 30])
@@ -18,6 +27,22 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(ll.remove(), 80)
         self.assertEqual(ll.remove(), 40)
         self.assertEqual(ll.as_python_list(), [60, 10, 30])
+        self.assertEqual(ll.remove(), 60)
+        self.assertEqual(ll.remove(), 10)
+        self.assertEqual(ll.remove(), 30)
+        self.assertRaises(IndexError, ll.remove)
+
+    def test_remove_from_end(self):
+        ll = self.get_test_list()
+        self.assertEqual(ll.as_python_list(), [50, 80, 40, 60, 10, 30])
+        self.assertEqual(ll.remove_from_end(), 30)
+        self.assertEqual(ll.remove_from_end(), 10)
+        self.assertEqual(ll.remove_from_end(), 60)
+        self.assertEqual(ll.as_python_list(), [50, 80, 40])
+        self.assertEqual(ll.remove_from_end(), 40)
+        self.assertEqual(ll.remove_from_end(), 80)
+        self.assertEqual(ll.remove_from_end(), 50)
+        self.assertRaises(IndexError, ll.remove_from_end)
 
     def get_test_list(self):
         ll = LinkedList()
