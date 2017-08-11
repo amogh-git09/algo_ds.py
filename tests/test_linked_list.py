@@ -44,6 +44,12 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(ll.remove_from_end(), 50)
         self.assertRaises(IndexError, ll.remove_from_end)
 
+    def test_length(self):
+        ll = self.get_test_list()
+        self.assertEqual(ll.length(), 6)
+        ll.remove()
+        self.assertEqual(ll.length(), 5)
+
     def get_test_list(self):
         ll = LinkedList()
         ll.insert(30)
