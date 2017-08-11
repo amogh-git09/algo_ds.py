@@ -625,6 +625,21 @@ class Node(object):
         n = merged_dll.length()
         return Node.dll_to_tree(merged_dll, n)
 
+    def binary_to_search_tree(self):
+        dll = DoublyLinkedList()
+        self.traversal_inorder_iter(lambda node: dll.insert_at_end(Node(node.key, node.val)))
+        dll.quick_sort()
+
+        # copy list to tree
+        to_copy = dll.head
+        stack = Stack()
+        self.insert_lefts(stack)
+        while not stack.is_empty():
+            n = stack.pop()
+            n.key, n.val = to_copy.val.key, to_copy.val.val
+            Node.insert_lefts(n.right, stack)
+            to_copy = to_copy.next
+
     def __eq__(self, other):
         return self.key == other.key
 

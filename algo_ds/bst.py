@@ -162,3 +162,6 @@ class BinarySearchTree(object):
     def inorder_pred_node(self, n):
         self.not_empty_or_error()
         return self.root.inorder_pred_node(n)
+
+    def binary_to_search_tree(self):
+        self.root.binary_to_search_tree()

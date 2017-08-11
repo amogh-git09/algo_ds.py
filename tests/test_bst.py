@@ -410,7 +410,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(result, [40, 50, 60, 80])
 
     def test_pred_succ(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual([x.key for x in tree.pred_succ(50)], [40, 60])
         self.assertEqual([x.key if x is not None else None for x in tree.pred_succ(80)], [70, None])
         self.assertEqual([x.key if x is not None else None for x in tree.pred_succ(20)], [None, 30])
@@ -418,7 +418,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual([x.key for x in tree.pred_succ(60)], [50, 70])
 
     def test_validate(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.validate(), True)
 
         tree = BinarySearchTree()
@@ -450,7 +450,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.validate(), False)
 
     def test_lowest_common_ancestor(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.lowest_common_ancestor(50, 50).key, 50)
         self.assertEqual(tree.lowest_common_ancestor(50, 80).key, 50)
         self.assertEqual(tree.lowest_common_ancestor(60, 80).key, 70)
@@ -459,7 +459,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.lowest_common_ancestor(20, 30).key, 30)
 
     def test_inorder_succ(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.inorder_succ(20).key, 30)
         self.assertEqual(tree.inorder_succ(30).key, 40)
         self.assertEqual(tree.inorder_succ(40).key, 50)
@@ -469,7 +469,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.inorder_succ(80), None)
 
     def test_kth_smallest(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.kth_smallest(0), None)
         self.assertEqual(tree.kth_smallest(1).key, 20)
         self.assertEqual(tree.kth_smallest(2).key, 30)
@@ -481,7 +481,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.kth_smallest(8), None)
 
     def test_inorder_two_trees(self):
-        tree1 = TestBinarySearchTree.test_tree()
+        tree1 = TestBinarySearchTree.binary_search_tree()
         tree2 = BinarySearchTree()
         tree2.insert(30, None)
         tree2.insert(28, None)
@@ -493,7 +493,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(result, [14, 20, 28, 30, 30, 40, 50, 60, 67, 70, 77, 80])
 
     def test_swap(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         node = tree.root.left.left
         old_root_key = tree.root.key
         old_node_key = node.key
@@ -502,7 +502,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(node.key, old_root_key)
 
     def test_correct_swapped_nodes(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         result = []
         tree.traversal_inorder_iter(lambda node: result.append(node.key))
 
@@ -523,7 +523,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(result, result2)
 
     def test_ceil(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.ceil(25).key, 30)
         self.assertEqual(tree.ceil(80).key, 80)
         self.assertEqual(tree.ceil(85), None)
@@ -533,7 +533,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.ceil(58).key, 60)
 
     def test_ceil_iter(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.ceil_iter(25).key, 30)
         self.assertEqual(tree.ceil_iter(80).key, 80)
         self.assertEqual(tree.ceil_iter(85), None)
@@ -543,7 +543,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.ceil_iter(58).key, 60)
 
     def test_floor(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.floor(25).key, 20)
         self.assertEqual(tree.floor(80).key, 80)
         self.assertEqual(tree.floor(85).key, 80)
@@ -553,7 +553,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.floor(58).key, 50)
 
     def test_sum_exists(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.sum_exists(80), True)
         self.assertEqual(tree.sum_exists(130), True)
         self.assertEqual(tree.sum_exists(15), False)
@@ -561,7 +561,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.sum_exists(40), False)
 
     def test_sum_exists(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.sum_exists2(80), True)
         self.assertEqual(tree.sum_exists2(130), True)
         self.assertEqual(tree.sum_exists2(15), False)
@@ -569,7 +569,7 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(tree.sum_exists2(40), False)
 
     def test_merge(self):
-        tree1 = TestBinarySearchTree.test_tree()
+        tree1 = TestBinarySearchTree.binary_search_tree()
         tree2 = BinarySearchTree()
         tree2.insert(10, None)
         tree2.insert(15, None)
@@ -581,24 +581,31 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(result, [10, 15, 20, 30, 35, 40, 50, 55, 60, 70, 80])
 
     def test_inorder_pred(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.inorder_pred(30).key, 20)
         self.assertEqual(tree.inorder_pred(80).key, 70)
         self.assertEqual(tree.inorder_pred(40).key, 30)
         self.assertEqual(tree.inorder_pred(20), None)
 
     def test_inorder_succ_node(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.inorder_succ_node(tree.root).key, 60)
         self.assertEqual(tree.inorder_succ_node(tree.root.right).key, 80)
 
     def test_inorder_pred_node(self):
-        tree = TestBinarySearchTree.test_tree()
+        tree = TestBinarySearchTree.binary_search_tree()
         self.assertEqual(tree.inorder_pred_node(tree.root).key, 40)
         self.assertEqual(tree.inorder_pred_node(tree.root.right).key, 60)
 
+    def test_binary_to_search_tree(self):
+        bst = TestBinarySearchTree.binary_tree()
+        bst.binary_to_search_tree()
+        result = []
+        bst.traversal_inorder_iter(lambda node: result.append(node.key))
+        self.assertEqual(result, [10, 25, 30, 35, 50, 60])
+
     @staticmethod
-    def test_tree():
+    def binary_search_tree():
         tree = BinarySearchTree()
         tree.insert(50, None)
         tree.insert(30, None)
@@ -607,4 +614,15 @@ class TestBinarySearchTree(unittest.TestCase):
         tree.insert(70, None)
         tree.insert(60, None)
         tree.insert(80, None)
+        return tree
+
+    @staticmethod
+    def binary_tree():
+        tree = BinarySearchTree()
+        tree.root = Node(30)
+        tree.root.left = Node(50)
+        tree.root.left.right = Node(60)
+        tree.root.right = Node(10)
+        tree.root.right.left = Node(25)
+        tree.root.right.right = Node(35)
         return tree
