@@ -65,7 +65,7 @@ class LinkedList(object):
         self.merge_sort()
         second_list.merge_sort()
         sorted = Node.merge(self.head, second_list.head)
-        self.head = sorted.head
+        self.head = sorted
 
     def remove_cycle(self):
         self.head.remove_cycle()
