@@ -41,6 +41,31 @@ class TestBinaryHeap(unittest.TestCase):
         self.assertEqual(heap.extract_min().key, 80)
         self.assertRaises(IndexError, heap.extract_min)
 
+    def test_find_key(self):
+        heap = self.get_test_heap()
+        self.assertEqual(heap.find_key(20), 0)
+        self.assertEqual(heap.find_key(30), 1)
+        self.assertEqual(heap.find_key(40), 4)
+        self.assertEqual(heap.find_key(50), 2)
+        self.assertEqual(heap.find_key(60), 3)
+        self.assertEqual(heap.find_key(80), 5)
+        self.assertEqual(heap.find_key(44), -1)
+
+    def test_decrease_key(self):
+        heap = self.get_test_heap()
+        heap.decrease_key(50, 10)
+        self.assertEqual(heap.get_keys(), [10,30,20,60,40,80])
+        heap.decrease_key(80, 5)
+        self.assertEqual(heap.get_keys(), [5,30,10,60,40,20])
+        self.assertRaises(ValueError, heap.decrease_key, 39, 4)
+
+    def test_delete(self):
+        heap = self.get_test_heap()
+        heap.delete(60)
+        self.assertEqual(heap.get_keys(), [20,30,50,80,40])
+        heap.delete(50)
+        self.assertEqual(heap.get_keys(), [20,30,40,80])
+
     @staticmethod
     def get_test_heap():
         heap = BinaryHeap(8)

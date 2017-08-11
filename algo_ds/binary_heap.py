@@ -1,4 +1,5 @@
 from functools import total_ordering
+import sys
 
 @total_ordering
 class Element(object):
@@ -61,6 +62,43 @@ class BinaryHeap(object):
         self.size -= 1
         self.heapify()
         return self.arr[self.size]
+
+    def decrease_key(self, old_key, new_key):
+        if old_key < new_key:
+            raise ValueError("New key {} is larger than the existing key {}".format(key, self.arr[index].key))
+
+        index = self.find_key(old_key)
+
+        if index == -1:
+            raise ValueError("Key {} not found".format(old_key))
+
+        self.arr[index].key = new_key
+        self.fix_heap_prop(index)
+
+    def delete(self, key):
+        index = self.find_key(key)
+
+        if index == -1:
+            raise ValueError("Key {} not found".format(key))
+
+        # decrease key to minimum possible
+        self.decrease_key(key, -sys.maxsize)
+
+        # swap
+        self.swap(0, self.size-1)
+        self.size -= 1
+
+        # heapify
+        self.heapify()
+
+    def find_key(self, key):
+        index = 0
+        while index < self.size and self.arr[index].key != key:
+            index += 1
+        if index < self.size:
+            return index
+        else:
+            return -1
 
     @staticmethod
     def left_child(index):
