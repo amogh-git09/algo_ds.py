@@ -52,6 +52,14 @@ class DoublyLinkedList(object):
         merged_head = DNode.merge(n1, n2)
         return DoublyLinkedList(merged_head)
 
+    def search_by_func(self, func):
+        if not self.head:
+            return None
+        return self.head.search_by_func(func)
+
+    def delete(self, val):
+        self.head = self.head.delete(val)
+
     def merge_sort(self):
         self.head = DNode.merge_sort(self.head)
 

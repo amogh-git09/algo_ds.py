@@ -134,6 +134,20 @@ class TestDoublyLinkedList(unittest.TestCase):
         self.assertEqual(dll.sum_exists(10), True)
         self.assertEqual(dll.sum_exists(20), False)
 
+    def test_search_by_func(self):
+        dll = TestDoublyLinkedList.get_test_dll()
+        self.assertEqual(dll.search_by_func(lambda e: e == 4), 4)
+        self.assertEqual(dll.search_by_func(lambda e: e == 334), None)
+
+    def test_delete(self):
+        dll = TestDoublyLinkedList.get_test_dll()
+        dll.delete(4)
+        self.assertEqual(str(dll), "1 -> 2 -> 3 -> 5 -> 6 -> 7 -> None")
+        dll.delete(7)
+        self.assertEqual(str(dll), "1 -> 2 -> 3 -> 5 -> 6 -> None")
+        dll.delete(1)
+        self.assertEqual(str(dll), "2 -> 3 -> 5 -> 6 -> None")
+
     def get_test_dll():
         dll = DoublyLinkedList()
         dll.insert_at_end(1)

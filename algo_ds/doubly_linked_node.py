@@ -174,5 +174,38 @@ class DNode(object):
             n = n.next
         return count
 
+    def search_by_func(head, func):
+        n = head
+        while n:
+            if func(n.val):
+                return n.val
+            n = n.next
+        return None
+
+    def search_node_by_func(head, func):
+        n = head
+        while n:
+            if func(n):
+                return n
+            n = n.next
+        return None
+
+    def delete_node(head, node):
+        prev_node = node.prev
+        next_node = node.next
+        if prev_node:
+            prev_node.next = next_node
+        if next_node:
+            next_node.prev = prev_node
+        node.next = node.prev = None
+        if head is node:
+            return next_node
+        else:
+            return head 
+
+    def delete(head, val):
+        node = head.search_node_by_func(lambda n: n.val is val)
+        return head.delete_node(node)
+
     def __str__(self):
         return str(self.val)
