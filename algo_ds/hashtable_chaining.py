@@ -1,17 +1,30 @@
 from algo_ds.doubly_linked_list import DoublyLinkedList
+from math import floor
 
 class Element(object):
     def __init__(self, key, val):
         self.key = key
         self.val = val
 
+    def __str__(self):
+        return "<key: {}, val: {}>".format(self.key, self.val)
+
 class HashTable(object):
-    def __init__(self):
-        self.m = 157
+    def __init__(self, multiplication_hash=False):
+        self.multiplication_hash = multiplication_hash
+        if multiplication_hash:
+            self.m = 256
+        else:
+            self.m = 157
         self.table = [None] * self.m
 
     def hash(self, key):
-        return key % self.m
+        if self.multiplication_hash:
+            A = 0.51
+            return floor(self.m * (key*A % 1))
+        else:
+            # division method
+            return key % self.m
 
     def insert(self, x):
         if not isinstance(x, Element):
