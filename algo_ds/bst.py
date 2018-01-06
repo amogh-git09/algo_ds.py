@@ -145,3 +145,23 @@ class BinarySearchTree(object):
     def sum_exists2(self, val):
         self.not_empty_or_error()
         return self.root.sum_exists2(val)
+
+    def merge(tree1, tree2):
+        tree1.not_empty_or_error()
+        tree2.not_empty_or_error()
+        return BinarySearchTree(Node.merge(tree1.root, tree2.root))
+
+    def inorder_pred(self, key):
+        self.not_empty_or_error()
+        return self.root.inorder_pred(key)
+
+    def inorder_succ_node(self, n):
+        self.not_empty_or_error()
+        return self.root.inorder_succ_node(n)
+
+    def inorder_pred_node(self, n):
+        self.not_empty_or_error()
+        return self.root.inorder_pred_node(n)
+
+    def binary_to_search_tree(self):
+        self.root.binary_to_search_tree()

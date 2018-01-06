@@ -2,7 +2,9 @@ from algo_ds.queue import Queue
 from algo_ds.stack import Stack
 from algo_ds.doubly_linked_list import DoublyLinkedList
 from algo_ds.doubly_linked_node import DNode
+from functools import total_ordering
 
+@total_ordering
 class Node(object):
     def __init__(self, key, val=None):
         self.key = key
@@ -209,6 +211,9 @@ class Node(object):
                     n = n.right
 
     def find_pred(self):
+        """
+        Finds pred in threaded binary tree
+        """
         pred = self.left
         while (pred.right is not None) and (pred.right is not self):
             pred = pred.right
@@ -417,6 +422,57 @@ class Node(object):
                 succ = node
                 node = node.left
 
+    def inorder_succ_node(self, n):
+        """
+        Returns inorder successor of node n.
+        """
+        succ = None
+        node = self
+        while node:
+            if node is n:
+                if node.right:
+                    return node.right.min_node()
+                return succ
+            elif node < n:
+                node = node.right
+            else:
+                succ = node
+                node = node.left
+
+    def inorder_pred(self, key):
+        """
+        Returns the inorder predecessor of node with key.
+        """
+        pred = None
+        node = self
+        while node:
+            if node.key == key:
+                if node.left:
+                    return node.left.max_node()
+                return pred
+            elif node.key > key:
+                node = node.left
+            else:
+                pred = node
+                node = node.right
+
+    def inorder_pred_node(self, n):
+        """
+        Returns the inorder predecessor of node n.
+        """
+        pred = None
+        node = self
+        while node:
+            if node is n:
+                if node.left:
+                    return node.left.max_node()
+                return pred
+            elif node > n:
+                node = node.left
+            else:
+                pred = node
+                node = node.right
+
     def kth_smallest(root, i, k):
         if root is None:
             return (i, None)
@@ -545,6 +601,50 @@ class Node(object):
                 n = s2.pop()
                 Node.insert_rights(n.left, s2)
         return False
+
+    def to_dll(self):
+        dll = DoublyLinkedList()
+        self.traversal_inorder_iter(lambda node: dll.insert_at_end(node))
+        return dll
+
+    def dll_to_tree(dll, n):
+        if n <= 0:
+            return None
+        left = Node.dll_to_tree(dll, n//2)
+        root = dll.head.val
+        dll.head = dll.head.next
+        right = Node.dll_to_tree(dll, n - n//2 - 1)
+        root.left = left
+        root.right = right
+        return root
+
+    def merge(root1, root2):
+        dll1 = root1.to_dll()
+        dll2 = root2.to_dll()
+        merged_dll = DoublyLinkedList.merge(dll1, dll2)
+        n = merged_dll.length()
+        return Node.dll_to_tree(merged_dll, n)
+
+    def binary_to_search_tree(self):
+        dll = DoublyLinkedList()
+        self.traversal_inorder_iter(lambda node: dll.insert_at_end(Node(node.key, node.val)))
+        dll.quick_sort()
+
+        # copy list to tree
+        to_copy = dll.head
+        stack = Stack()
+        self.insert_lefts(stack)
+        while not stack.is_empty():
+            n = stack.pop()
+            n.key, n.val = to_copy.val.key, to_copy.val.val
+            Node.insert_lefts(n.right, stack)
+            to_copy = to_copy.next
+
+    def __eq__(self, other):
+        return self.key == other.key
+
+    def __lt__(self, other):
+        return self.key < other.key
 
     def __str__(self):
         return "<key: {}, val: {}>".format(self.key, self.val)
