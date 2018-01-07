@@ -23,6 +23,31 @@ class TestBinarySearchTree(unittest.TestCase):
         [t.insert_node(node) for node in nodes]
         return t
 
+    def test_deletion(self):
+        t = BinarySearchTree()
+        nodes = [TreeNode(x) for x in [8,1,4,6,2,3,7,5]]
+        [t.insert_node(node) for node in nodes]
+
+        self.assertEqual(t.root.left.right.left.right.key, 3)
+        t.delete(nodes[5])
+        self.assertEqual(t.root.left.right.left.right, None)
+
+        self.assertEqual(t.root.key, 8)
+        t.delete(nodes[0])
+        self.assertEqual(t.root.key, 1)
+
+        self.assertEqual(t.root.right.key, 4)
+        t.delete(nodes[2])
+        self.assertEqual(t.root.right.key, 5)
+        self.assertEqual(t.root.right.left.key, 2)
+        self.assertEqual(t.root.right.right.key, 6)
+
+        self.assertEqual(t.root.right.key, 5)
+        t.delete(nodes[7])
+        self.assertEqual(t.root.right.key, 6)
+        self.assertEqual(t.root.right.left.key, 2)
+        self.assertEqual(t.root.right.right.key, 7)
+
     def test_inorder_walk(self):
         t = self.get_test_tree()
         # inorder_tree_walk(nodes[0])

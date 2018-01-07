@@ -31,3 +31,28 @@ class BinarySearchTree(object):
     def insert(self, key):
         node = TreeNode(key)
         self.insert_node(node)
+
+    def transplant(self, u, v):
+        if u.parent == None:
+            self.root = v
+        elif u.parent.left == u:
+            u.parent.left = v
+        else:
+            u.parent.right = v
+        if v != None:
+            v.parent = u.parent
+
+    def delete(self, z):
+        if z.right is None:
+            self.transplant(z, z.left)
+        elif z.left is None:
+            self.transplant(z, z.left)
+        else:
+            y = minimum(z.right)
+            if y.parent != z:
+                self.transplant(y, y.right)
+                y.right = z.right
+                y.right.parent = y
+            self.transplant(z, y)
+            y.left = z.left
+            y.left.parent = y
