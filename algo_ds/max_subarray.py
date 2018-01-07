@@ -50,3 +50,27 @@ def max_subarray(A):
     if n == 0:
         raise ValueError("List cannot be empty")
     return max_subarray_aux(A, 0, n-1)
+
+def max_subarray_linear(A):
+    n = len(A)
+    curr_max = A[0]
+    low = 0
+    high = 0
+    cb = 0 # current buffer
+
+    for j in range(1, n):
+        update_cb = True
+        if curr_max+cb+A[j] > curr_max:
+            curr_max = curr_max + cb + A[j]
+            high = j
+            update_cb = False
+        if A[j] > curr_max:
+            curr_max = A[j]
+            low = j
+            high = j
+            update_cb = False
+        if update_cb:
+            cb += A[j]
+        else: cb = 0
+
+    return (low, high, curr_max)
