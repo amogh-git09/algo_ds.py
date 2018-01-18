@@ -6,6 +6,15 @@ class TestBST(unittest.TestCase):
         self.assertEqual(is_bst(self.get_valid_bst()), True)
         self.assertEqual(is_bst(self.get_invalid_bst()), False)
 
+        self.assertEqual(is_bst2(self.get_valid_bst()), True)
+        self.assertEqual(is_bst2(self.get_invalid_bst()), False)
+
+        self.assertEqual(is_bst3(self.get_valid_bst()), True)
+        self.assertEqual(is_bst3(self.get_invalid_bst()), False)
+
+        self.assertEqual(is_bst4(self.get_valid_bst()), True)
+        self.assertEqual(is_bst4(self.get_invalid_bst()), False)
+
     def get_invalid_bst(self):
         """
               3
